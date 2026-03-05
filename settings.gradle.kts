@@ -19,5 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "ELEC390-Android-frontend"
+rootProject.name = "My Application"
 include(":app")
+ 
