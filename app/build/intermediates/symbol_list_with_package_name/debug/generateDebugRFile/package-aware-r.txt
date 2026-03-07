@@ -1,0 +1,25 @@
+com.example.myapplication
+color black
+color white
+drawable ic_launcher_background
+drawable ic_launcher_foreground
+id bottomAppBar
+id charts_textView
+id chlorine_button
+id chlorine_textView
+id main
+id pH_button
+id pH_textView
+id readings_textView
+id temp_button
+id temp_textView
+id wlvl_button
+id wlvl_textView
+layout activity_main
+mipmap ic_launcher
+mipmap ic_launcher_round
+string app_name
+style Base_Theme_MyApplication
+style Theme_MyApplication
+xml backup_rules
+xml data_extraction_rules
