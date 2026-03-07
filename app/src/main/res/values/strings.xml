@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="charts">Charts</string>
+    <string name="chlorine">Chlorine</string>
+    <string name="chlorine_data">Chlorine data...</string>
+    <string name="ph">pH</string>
+    <string name="ph_data">pH data...</string>
+    <string name="readings">Readings</string>
+    <string name="temperature">TEMPERATURE</string>
+    <string name="water_level_data">Water Level data...</string>
+    <string name="water_level">WATER LEVEL</string>
+    <string name="temperature_data">Temperature data...</string>
 </resources>
