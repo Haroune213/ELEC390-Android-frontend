@@ -8,32 +8,20 @@
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\layout\\activity_register.xml"
     },
     {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-hdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-hdpi\\ic_launcher_round.webp"
-    },
-    {
         "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxhdpi\\ic_launcher.webp"
-    },
-    {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
         "merged": "com.example.myapplication.app-debug-35:/layout_activity_main.xml.flat",
         "source": "com.example.myapplication.app-main-37:/layout/activity_main.xml"
     },
     {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xhdpi_ic_launcher.webp.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xhdpi\\ic_launcher.webp"
+        "merged": "com.example.myapplication.app-debug-35:/layout_activity_profile.xml.flat",
+        "source": "com.example.myapplication.app-main-37:/layout/activity_profile.xml"
     },
     {
         "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\xml_data_extraction_rules.xml.flat",
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\xml\\data_extraction_rules.xml"
-    },
-    {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
     },
     {
         "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\drawable_ic_launcher_background.xml.flat",
@@ -52,6 +40,46 @@
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\drawable\\ic_launcher_foreground.xml"
     },
     {
+        "merged": "com.example.myapplication.app-debug-35:/drawable_profile_icon.xml.flat",
+        "source": "com.example.myapplication.app-main-37:/drawable/profile_icon.xml"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\layout_activity_login.xml.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\layout\\activity_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "com.example.myapplication.app-debug-35:/layout_activity_settings.xml.flat",
+        "source": "com.example.myapplication.app-main-37:/layout/activity_settings.xml"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "com.example.myapplication.app-debug-35:/drawable_home_icon.xml.flat",
+        "source": "com.example.myapplication.app-main-37:/drawable/home_icon.xml"
+    },
+    {
         "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxxhdpi\\ic_launcher.webp"
     },
@@ -66,17 +94,5 @@
     {
         "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-mdpi_ic_launcher_round.webp.flat",
         "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-mdpi\\ic_launcher_round.webp"
-    },
-    {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\layout_activity_login.xml.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\layout\\activity_login.xml"
-    },
-    {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
-    },
-    {
-        "merged": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-debug-35:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
-        "source": "C:\\Users\\harou\\.gradle\\daemon\\9.1.0\\com.example.myapplication.app-main-37:\\mipmap-xxhdpi\\ic_launcher_round.webp"
     }
 ]

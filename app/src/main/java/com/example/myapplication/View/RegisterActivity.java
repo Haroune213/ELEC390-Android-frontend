@@ -8,13 +8,10 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Model.ApiClient;
-import com.example.myapplication.Model.ApiService;
+import com.example.myapplication.API.ApiClient;
+import com.example.myapplication.API.ApiService;
 import com.example.myapplication.Model.RegisterRequest;
 import com.example.myapplication.R;
-import com.example.myapplication.Model.ApiClient;
-import com.example.myapplication.Model.ApiService;
-import com.example.myapplication.Model.RegisterRequest;
 
 import java.util.Map;
 

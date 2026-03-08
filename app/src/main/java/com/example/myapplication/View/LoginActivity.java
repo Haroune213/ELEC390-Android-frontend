@@ -9,8 +9,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.Model.ApiClient;
-import com.example.myapplication.Model.ApiService;
+import com.example.myapplication.API.ApiClient;
+import com.example.myapplication.API.ApiService;
 import com.example.myapplication.Model.LoginRequest;
 import com.example.myapplication.R;
 
