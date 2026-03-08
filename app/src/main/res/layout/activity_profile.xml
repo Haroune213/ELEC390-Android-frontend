@@ -102,7 +102,7 @@
         android:id="@+id/button3"
         android:layout_width="277dp"
         android:layout_height="55dp"
-        android:backgroundTint="#6ABAC7"
+        android:backgroundTint="#76CCD7"
         android:elegantTextHeight="false"
         android:text="Log Out"
         android:textAlignment="center"

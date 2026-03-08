@@ -4,7 +4,7 @@ int drawable home_icon 0x0
 int drawable ic_launcher_background 0x0
 int drawable ic_launcher_foreground 0x0
 int drawable profile_icon 0x0
-int id bottomNavigationView 0x0
+int id bottom_nav 0x0
 int id button 0x0
 int id button3 0x0
 int id button4 0x0
@@ -27,7 +27,7 @@ int id divider5 0x0
 int id editTextNumberDecimal 0x0
 int id editTextNumberDecimal4 0x0
 int id emailEdit 0x0
-int id frameLayout 0x0
+int id frame_content 0x0
 int id loginButton 0x0
 int id loginButton2 0x0
 int id main 0x0

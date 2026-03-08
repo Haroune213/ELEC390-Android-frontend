@@ -13,8 +13,7 @@
     <string name="temperature_data">Temperature data</string>
     <string name="water_level">WATER LEVEL</string>
     <string name="water_level_data">Water Level data</string>
-    <style name="Base.Theme.MyApplication" parent="Theme.AppCompat.Light.NoActionBar">
-        
+    <style name="Base.Theme.MyApplication" parent="Theme.MaterialComponents.Light.NoActionBar">
         
     </style>
     <style name="Theme.MyApplication" parent="Base.Theme.MyApplication"/>
