@@ -1,6 +1,7 @@
 package com.example.myapplication.View;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,71 +9,77 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.myapplication.API.ApiClient;
-import com.example.myapplication.API.ApiService;
-import com.example.myapplication.Model.RegisterRequest;
+import com.example.myapplication.Controller.AuthentificationController;
 import com.example.myapplication.R;
 
 import java.util.Map;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class RegisterActivity extends AppCompatActivity {
 
-    private EditText usernameText, emailText, passwordText;
-    private Button registerButton, backToLoginButton;
+    private EditText usernameEditText;
+    private EditText emailEditText;
+    private EditText passwordEditText;
+
+    private Button registerButton;
+    private Button loginButton;
+
+    private AuthentificationController authenticationController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        usernameText = findViewById(R.id.usernameEdit2);
-        emailText = findViewById(R.id.emailEdit);
-        passwordText = findViewById(R.id.passwordEdit2);
+        usernameEditText = findViewById(R.id.usernameEdit2);
+        emailEditText = findViewById(R.id.emailEdit);
+        passwordEditText = findViewById(R.id.passwordEdit2);
         registerButton = findViewById(R.id.registerButton2);
-        backToLoginButton = findViewById(R.id.loginButton2);
+        loginButton = findViewById(R.id.loginButton2);
 
+        authenticationController = new AuthentificationController();
+
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
         registerButton.setOnClickListener(v -> {
-            String username = usernameText.getText().toString().trim();
-            String email = emailText.getText().toString().trim();
-            String password = passwordText.getText().toString().trim();
+            String username = usernameEditText.getText().toString().trim();
+            String email = emailEditText.getText().toString().trim();
+            String password = passwordEditText.getText().toString().trim();
 
             if (username.isEmpty() || email.isEmpty() || password.isEmpty()) {
-                Toast.makeText(RegisterActivity.this, "Please fill in all fields", Toast.LENGTH_SHORT).show();
+                Toast.makeText(RegisterActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            RegisterRequest registerRequest = new RegisterRequest(username, email, password);
-            ApiService apiService = ApiClient.getClient().create(ApiService.class);
+            authenticationController.register(username, email, password,
+                    new AuthentificationController.RegisterCallback() {
+                        @Override
+                        public void onSuccess(Map<String, String> data) {
 
-            apiService.register(registerRequest).enqueue(new Callback<Map<String, String>>() {
-                @Override
-                public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
-                    if (response.isSuccessful() && response.body() != null) {
-                        Toast.makeText(RegisterActivity.this, response.body().get("message"), Toast.LENGTH_SHORT).show();
+                            String token = data.get("token");
+                            String message = data.get("message");
 
-                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                        startActivity(intent);
-                        finish();
-                    } else {
-                        Toast.makeText(RegisterActivity.this, "Registration failed: " + response.code(), Toast.LENGTH_SHORT).show();
-                    }
-                }
+                            SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                            prefs.edit()
+                                    .putBoolean("isLoggedIn", true)
+                                    .putString("username", username)
+                                    .putString("token", token)
+                                    .apply();
 
-                @Override
-                public void onFailure(Call<Map<String, String>> call, Throwable t) {
-                    Toast.makeText(RegisterActivity.this, "Error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
-                }
-            });
-        });
+                            Toast.makeText(RegisterActivity.this,
+                                    message != null ? message : "Registration successful",
+                                    Toast.LENGTH_SHORT).show();
 
-        backToLoginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            finish();
+                        }
+
+                        @Override
+                        public void onError(String errorMessage) {
+                            Toast.makeText(RegisterActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
     }
 }
