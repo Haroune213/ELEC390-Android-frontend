@@ -16,6 +16,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.myapplication.Controller.TemperatureController;
 import com.example.myapplication.Model.TemperatureData;
 import com.example.myapplication.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,23 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupUI();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();  // get the ID of the selected item
+            if (id == R.id.nav_home) {
+                // Already on MainActivity
+                return true;
+            } else if (id == R.id.nav_profile) {
+                startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                return true;
+            } else if (id == R.id.nav_settings) {
+                startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                return true;
+            }
+            return false;
+        });
+
 
         temperatureController = new TemperatureController();
 

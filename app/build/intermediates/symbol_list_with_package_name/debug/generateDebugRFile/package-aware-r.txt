@@ -1,10 +1,11 @@
 com.example.myapplication
 color black
 color white
-drawable home_icon
+drawable ic_home
 drawable ic_launcher_background
 drawable ic_launcher_foreground
-drawable profile_icon
+drawable ic_profile
+drawable ic_settings
 id bottom_nav
 id button
 id button3
@@ -32,6 +33,9 @@ id frame_content
 id loginButton
 id loginButton2
 id main
+id nav_home
+id nav_profile
+id nav_settings
 id pH_button
 id pH_textView
 id passwordEdit2
@@ -67,15 +71,19 @@ layout activity_main
 layout activity_profile
 layout activity_register
 layout activity_settings
+menu bottom_nav
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
 string charts
 string chlorine
 string chlorine_data
+string home
 string ph
 string ph_data
+string profile
 string readings
+string settings
 string temperature
 string temperature_data
 string water_level

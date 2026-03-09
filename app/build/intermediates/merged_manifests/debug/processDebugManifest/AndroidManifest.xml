@@ -44,6 +44,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.example.myapplication.View.ProfileActivity" />
+        <activity android:name="com.example.myapplication.View.SettingsActivity" />
 
         <provider
             android:name="androidx.startup.InitializationProvider"
