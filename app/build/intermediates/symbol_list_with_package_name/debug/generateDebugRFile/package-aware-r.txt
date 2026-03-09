@@ -5,7 +5,7 @@ drawable home_icon
 drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable profile_icon
-id bottomNavigationView
+id bottom_nav
 id button
 id button3
 id button4
@@ -28,7 +28,7 @@ id divider5
 id editTextNumberDecimal
 id editTextNumberDecimal4
 id emailEdit
-id frameLayout
+id frame_content
 id loginButton
 id loginButton2
 id main

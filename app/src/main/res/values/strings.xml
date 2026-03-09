@@ -10,4 +10,7 @@
     <string name="water_level_data">Water Level data</string>
     <string name="water_level">WATER LEVEL</string>
     <string name="temperature_data">Temperature data</string>
+    <string name="home">home</string>
+    <string name="profile">profile</string>
+    <string name="settings">settings</string>
 </resources>

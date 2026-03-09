@@ -234,7 +234,7 @@
         android:id="@+id/button"
         android:layout_width="299dp"
         android:layout_height="44dp"
-        android:backgroundTint="#6ABAC7"
+        android:backgroundTint="#76CCD7"
         android:text="All Alerts"
         android:textAlignment="textStart"
         android:textAllCaps="true"
