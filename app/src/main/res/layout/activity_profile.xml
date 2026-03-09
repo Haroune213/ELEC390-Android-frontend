@@ -99,7 +99,7 @@
         app:opticalCenterEnabled="false" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/logout_button"
         android:layout_width="277dp"
         android:layout_height="55dp"
         android:backgroundTint="#76CCD7"

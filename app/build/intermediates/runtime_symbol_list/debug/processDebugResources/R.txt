@@ -3762,7 +3762,6 @@ int id bounceBoth 0x7f080067
 int id bounceEnd 0x7f080068
 int id bounceStart 0x7f080069
 int id button 0x7f08006a
-int id button3 0x7f08006b
 int id button4 0x7f08006c
 int id button5 0x7f08006d
 int id button6 0x7f08006e
@@ -3932,6 +3931,7 @@ int id listMode 0x7f080111
 int id list_item 0x7f080112
 int id loginButton 0x7f080113
 int id loginButton2 0x7f080114
+int id logout_button 0x7f080247
 int id m3_side_sheet 0x7f080115
 int id main 0x7f080116
 int id marquee 0x7f080117

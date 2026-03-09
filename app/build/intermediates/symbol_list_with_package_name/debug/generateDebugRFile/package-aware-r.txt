@@ -8,7 +8,6 @@ drawable ic_profile
 drawable ic_settings
 id bottom_nav
 id button
-id button3
 id button4
 id button5
 id button6
@@ -32,6 +31,7 @@ id emailEdit
 id frame_content
 id loginButton
 id loginButton2
+id logout_button
 id main
 id nav_home
 id nav_profile
