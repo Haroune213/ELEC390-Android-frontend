@@ -3766,6 +3766,7 @@ int id button4 0x7f08006b
 int id buttonPanel 0x7f08006c
 int id cache_measures 0x7f08006d
 int id callMeasure 0x7f08006e
+int id cancel_btn 0x7f080249
 int id cancel_button 0x7f08006f
 int id carryVelocity 0x7f080070
 int id center 0x7f080071
@@ -3790,7 +3791,9 @@ int id clockwise 0x7f080087
 int id closest 0x7f080088
 int id collapseActionView 0x7f080089
 int id compress 0x7f08008a
+int id confirm_btn 0x7f08024a
 int id confirm_button 0x7f08008b
+int id confirmation_tv 0x7f08024b
 int id constraint 0x7f08008c
 int id container 0x7f08008d
 int id content 0x7f08008e
@@ -3843,8 +3846,7 @@ int id easeInOut 0x7f0800bc
 int id easeOut 0x7f0800bd
 int id east 0x7f0800be
 int id edge 0x7f0800bf
-int id editTextNumberDecimal 0x7f0800c0
-int id editTextNumberDecimal4 0x7f0800c1
+int id edit_button 0x7f08024c
 int id edit_query 0x7f0800c2
 int id edit_text_id 0x7f0800c3
 int id elastic 0x7f0800c4
@@ -4032,6 +4034,12 @@ int id outline 0x7f080178
 int id outward 0x7f080179
 int id overshoot 0x7f08017a
 int id pH_button 0x7f08017b
+int id pH_checkBox 0x7f08024d
+int id pH_checkBox2 0x7f08024e
+int id pH_checkBox3 0x7f08024f
+int id pH_checkBox4 0x7f080250
+int id pH_checkBox5 0x7f080251
+int id pH_checkBox6 0x7f080252
 int id pH_textView 0x7f08017c
 int id packed 0x7f08017d
 int id parallax 0x7f08017e
@@ -4054,8 +4062,6 @@ int id progress_circular 0x7f08018e
 int id progress_horizontal 0x7f08018f
 int id radio 0x7f080190
 int id radioButton3 0x7f080193
-int id radioButton5 0x7f080194
-int id radioButton6 0x7f080195
 int id radioButton7 0x7f080196
 int id radioButton8 0x7f080197
 int id radioButton9 0x7f080198
@@ -4164,14 +4170,15 @@ int id textStart 0x7f0801fe
 int id textTop 0x7f0801ff
 int id textView 0x7f080200
 int id textView10 0x7f080201
-int id textView11 0x7f080202
-int id textView15 0x7f080203
+int id textView12 0x7f080253
+int id textView13 0x7f080254
 int id textView2 0x7f080204
 int id textView3 0x7f080205
 int id textView4 0x7f080248
 int id textView6 0x7f080207
 int id textView7 0x7f080208
 int id textView8 0x7f080209
+int id textView9 0x7f080255
 int id text_input_end_icon 0x7f08020a
 int id text_input_error_icon 0x7f08020b
 int id text_input_start_icon 0x7f08020c
@@ -4371,6 +4378,8 @@ int layout design_navigation_menu 0x7f0b002d
 int layout design_navigation_menu_item 0x7f0b002e
 int layout design_text_input_end_icon 0x7f0b002f
 int layout design_text_input_start_icon 0x7f0b0030
+int layout fragment_delete_profile_dialog 0x7f0b0072
+int layout fragment_edit_pool_info_dialog 0x7f0b0073
 int layout ime_base_split_test_activity 0x7f0b0031
 int layout ime_secondary_split_test_activity 0x7f0b0032
 int layout m3_alert_dialog 0x7f0b0033
@@ -4494,6 +4503,7 @@ int string error_icon_content_description 0x7f100032
 int string exposed_dropdown_menu_content_description 0x7f100033
 int string fab_transformation_scrim_behavior 0x7f100034
 int string fab_transformation_sheet_behavior 0x7f100035
+int string hello_blank_fragment 0x7f1000ba
 int string hide_bottom_view_on_scroll_behavior 0x7f100036
 int string home 0x7f100037
 int string icon_content_description 0x7f100038

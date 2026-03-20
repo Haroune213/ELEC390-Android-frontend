@@ -28,12 +28,12 @@
         "source": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-main-37:/mipmap-xxxhdpi/ic_launcher_round.webp"
     },
     {
-        "merged": "com.example.myapplication.app-debug-35:/layout_activity_profile.xml.flat",
-        "source": "com.example.myapplication.app-main-37:/layout/activity_profile.xml"
-    },
-    {
         "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/mipmap-mdpi_ic_launcher.webp.flat",
         "source": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-main-37:/mipmap-mdpi/ic_launcher.webp"
+    },
+    {
+        "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/layout_fragment_delete_profile_dialog.xml.flat",
+        "source": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-main-37:/layout/fragment_delete_profile_dialog.xml"
     },
     {
         "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/menu_bottom_nav.xml.flat",
@@ -74,6 +74,10 @@
     {
         "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/layout_activity_register.xml.flat",
         "source": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-main-37:/layout/activity_register.xml"
+    },
+    {
+        "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/layout_fragment_edit_pool_info_dialog.xml.flat",
+        "source": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-main-37:/layout/fragment_edit_pool_info_dialog.xml"
     },
     {
         "merged": "/Users/amanimagra/.gradle/daemon/9.1.0/com.example.myapplication.app-debug-35:/drawable_ic_launcher_foreground.xml.flat",
