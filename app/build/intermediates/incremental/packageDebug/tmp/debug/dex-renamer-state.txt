@@ -1,15 +1,15 @@
-#Sun Mar 08 23:05:04 EDT 2026
-base.0=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes.dex
-base.1=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\0\\classes.dex
-base.2=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\13\\classes.dex
-base.3=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\1\\classes.dex
-base.4=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\4\\classes.dex
-base.5=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeProjectDexDebug\\6\\classes.dex
-base.6=C\:\\Users\\harou\\AndroidStudioProjects\\elec390\\ELEC390-Android-frontend\\app\\build\\intermediates\\dex\\debug\\mergeExtDexDebug\\classes2.dex
+#Fri Mar 20 16:01:19 EDT 2026
+base.0=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeExtDexDebug/classes.dex
+base.1=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeProjectDexDebug/0/classes.dex
+base.2=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeProjectDexDebug/1/classes.dex
+base.3=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeProjectDexDebug/13/classes.dex
+base.4=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeProjectDexDebug/4/classes.dex
+base.5=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeProjectDexDebug/6/classes.dex
+base.6=/Users/amanimagra/AndroidStudioProjects/Android390/app/build/intermediates/dex/debug/mergeExtDexDebug/classes2.dex
 path.0=classes.dex
 path.1=0/classes.dex
-path.2=13/classes.dex
-path.3=1/classes.dex
+path.2=1/classes.dex
+path.3=13/classes.dex
 path.4=4/classes.dex
 path.5=6/classes.dex
 path.6=classes2.dex
