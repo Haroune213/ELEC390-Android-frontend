@@ -5,7 +5,8 @@ import android.content.SharedPreferences;
 
 public class AlertManager {
 
-    public static void checkLevels(Context context, double chlorine, double salt, double ph, double waterLevel, double temperature) {
+    // This function is better in the backend instead.
+    public static void checkLevels(Context context, double chlorine, double salt, double ph, int depth, int tds, double temperature) {
 
         SharedPreferences prefs = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         boolean alertEnabled = prefs.getBoolean("Alert", true);
@@ -36,10 +37,16 @@ public class AlertManager {
                     "Add pH reducer.");
         }
 
-        if (waterLevel < 30) {
+        if (depth < 30) {
             NotificationHelper.sendNotification(context,
                     "Low Water Level",
                     "Possibility of leakage");
+        }
+
+        if (tds < 2000) {
+            NotificationHelper.sendNotification(context,
+                    "Bad Water Quality",
+                    "Clean your pool");
         }
 
         if (temperature < 15 ){

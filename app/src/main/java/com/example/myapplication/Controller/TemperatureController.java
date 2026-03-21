@@ -13,13 +13,13 @@ import retrofit2.Response;
 public class TemperatureController {
 
     private final ApiService apiService;
-
     public TemperatureController() {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
     public void fetchTemperatureForUser(String userId, TemperatureCallback callback) {
         apiService.getTemperaturesForUser(userId).enqueue(new Callback<List<TemperatureData>>() {
+
             @Override
             public void onResponse(Call<List<TemperatureData>> call, Response<List<TemperatureData>> response) {
                 if (response.isSuccessful() && response.body() != null) {

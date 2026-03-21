@@ -1,8 +1,11 @@
 package com.example.myapplication.API;
 
+import com.example.myapplication.Model.DepthData;
 import com.example.myapplication.Model.LoginRequest;
 import com.example.myapplication.Model.RegisterRequest;
+import com.example.myapplication.Model.TdsData;
 import com.example.myapplication.Model.TemperatureData;
+import com.example.myapplication.Model.pHData;
 
 import java.util.List;
 import java.util.Map;
@@ -21,4 +24,13 @@ public interface ApiService {
 
     @GET("/api/temperature/{userId}")
     Call<List<TemperatureData>> getTemperaturesForUser(@Path("userId") String userId);
+
+    @GET("/api/tds/{userId}")
+    Call<List<TdsData>> getTdsForUser(@Path("userId") String userId);
+
+    @GET("/api/depth/{userId}")
+    Call<List<DepthData>> getDepthForUser(@Path("userId") String userId);
+
+    @GET("/api/depth/{userId}")
+    Call<List<pHData>> getPhForUser(@Path("userId") String userId);
 }
