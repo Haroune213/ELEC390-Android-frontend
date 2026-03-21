@@ -16,12 +16,11 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.myapplication.Controller.TemperatureController;
 import com.example.myapplication.Model.TemperatureData;
 import com.example.myapplication.R;
+import com.example.myapplication.UI.GaugeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
-
-    protected Button chlorine_button, pH_button, wlvl_button, temp_button;
-    protected TextView chlorine_textView, pH_textView, wlvl_textView, temp_textView;
+    protected GaugeView temp_gauge, depth_gauge, ph_gauge, tds_gauge;
 
     private TemperatureController temperatureController;
 
@@ -38,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         setupUI();
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
 
         bottomNavigationView.setOnItemSelectedListener(item -> {
@@ -76,15 +76,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupUI() {
-        chlorine_button = findViewById(R.id.chlorine_button);
-        pH_button = findViewById(R.id.pH_button);
-        wlvl_button = findViewById(R.id.wlvl_button);
-        temp_button = findViewById(R.id.temp_button);
+        temp_gauge = findViewById(R.id.temp_gauge);
+        temp_gauge.setTitle("Temperature");
+        temp_gauge.setMinValue(0f);
+        temp_gauge.setMaxValue(50f);
+        temp_gauge.setRanges(10f, 18f, 30f, 38f);
+        temp_gauge.setValueAnimated(22f);
 
-        chlorine_textView = findViewById(R.id.chlorine_textView);
-        pH_textView = findViewById(R.id.pH_textView);
-        wlvl_textView = findViewById(R.id.wlvl_textView);
-        temp_textView = findViewById(R.id.temp_textView);
+        temp_gauge = findViewById(R.id.depth_gauge);
+        temp_gauge.setTitle("Depth");
+        temp_gauge.setMinValue(0f);
+        temp_gauge.setMaxValue(200f);
+        temp_gauge.setRanges(160f, 170f, 190f, 195f);
+        temp_gauge.setValueAnimated(182f);
+
+        temp_gauge = findViewById(R.id.ph_gauge);
+        temp_gauge.setTitle("Ph");
+        temp_gauge.setMinValue(0f);
+        temp_gauge.setMaxValue(14f);
+        temp_gauge.setRanges(2000f, 2800f, 6000f, 7000f);
+        temp_gauge.setValueAnimated(8f);
+        temp_gauge = findViewById(R.id.tds_gauge);
+        temp_gauge.setTitle("TDS");
+        temp_gauge.setMinValue(0f);
+        temp_gauge.setMaxValue(8000f);
+        temp_gauge.setRanges(10f, 18f, 30f, 38f);
+        temp_gauge.setValueAnimated(2030f);
+//        chlorine_button = findViewById(R.id.chlorine_button);
+//        pH_button = findViewById(R.id.pH_button);
+//        wlvl_button = findViewById(R.id.wlvl_button);
+//        temp_button = findViewById(R.id.temp_button);
+//
+//        chlorine_textView = findViewById(R.id.chlorine_textView);
+//        pH_textView = findViewById(R.id.pH_textView);
+//        wlvl_textView = findViewById(R.id.wlvl_textView);
+//        temp_textView = findViewById(R.id.temp_textView);
     }
 
     private void fetchTemperature() {
@@ -93,12 +119,14 @@ public class MainActivity extends AppCompatActivity {
         temperatureController.fetchTemperatureForUser(userId, new TemperatureController.TemperatureCallback() {
             @Override
             public void onSuccess(TemperatureData temperatureData) {
-                temp_textView.setText(temperatureData.getTemperature() + " °C");
+                //temp_textView.setText(temperatureData.getTemperature() + " °C");
+                double temp = temperatureData.getTemperature();
+                temp_gauge.setValue((float) temp);
             }
 
             @Override
             public void onEmpty() {
-                temp_textView.setText("No data");
+
             }
 
             @Override

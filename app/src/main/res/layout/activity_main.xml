@@ -7,157 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".View.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/frame_content"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_nav"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
-        android:id="@+id/readings_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/readings"
-        android:textAllCaps="false"
-        android:textColor="#090404"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.07"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.061" />
-
-    <TextView
-        android:id="@+id/temp_textView"
-        android:layout_width="130dp"
-        android:layout_height="72dp"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/pH_textView"
-        android:layout_width="130dp"
-        android:layout_height="72dp"
-        android:text="@string/ph_data"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212" />
-
-    <TextView
-        android:id="@+id/wlvl_textView"
-        android:layout_width="130dp"
-        android:layout_height="72dp"
-        android:text="@string/water_level_data"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.47"
-        tools:ignore="TextSizeCheck" />
-
-    <TextView
-        android:id="@+id/chlorine_textView"
-        android:layout_width="130dp"
-        android:layout_height="72dp"
-        android:text="@string/chlorine_data"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.212"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/temp_button"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#76CCD7"
-        android:text="@string/temperature"
-        android:textSize="11.61sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.775"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.381"
-        tools:ignore="TextSizeCheck" />
-
-    <Button
-        android:id="@+id/wlvl_button"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#76CCD7"
-        android:text="@string/water_level"
-        android:textAllCaps="false"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.192"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.381" />
-
-    <Button
-        android:id="@+id/pH_button"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#76CCD7"
-        android:text="@string/ph"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.776"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
-
-    <Button
-        android:id="@+id/chlorine_button"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
-        android:backgroundTint="#76CCD7"
-        android:text="@string/chlorine"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.194"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.132" />
-
-    <TextView
-        android:id="@+id/charts_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/charts"
-        android:textAllCaps="false"
-        android:textColor="#090404"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.067"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.568" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
@@ -170,5 +19,43 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav" />
+
+    <com.example.myapplication.UI.GaugeView
+        android:id="@+id/depth_gauge"
+        android:layout_width="168dp"
+        android:layout_height="154dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.myapplication.UI.GaugeView
+        android:id="@+id/tds_gauge"
+        android:layout_width="168dp"
+        android:layout_height="154dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/depth_gauge" />
+
+    <com.example.myapplication.UI.GaugeView
+        android:id="@+id/temp_gauge"
+        android:layout_width="168dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/depth_gauge"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.example.myapplication.UI.GaugeView
+        android:id="@+id/ph_gauge"
+        android:layout_width="168dp"
+        android:layout_height="154dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tds_gauge"
+        app:layout_constraintTop_toBottomOf="@+id/temp_gauge" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
