@@ -43,8 +43,12 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#E46B4F"
             android:text="Delete"
-            tools:layout_editor_absoluteX="266dp"
-            tools:layout_editor_absoluteY="143dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.804"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.209" />
 
         <Button
             android:id="@+id/cancel_btn"
@@ -52,8 +56,12 @@
             android:layout_height="wrap_content"
             android:backgroundTint="#76CCD7"
             android:text="Cancel"
-            tools:layout_editor_absoluteX="51dp"
-            tools:layout_editor_absoluteY="143dp" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.197"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.209" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

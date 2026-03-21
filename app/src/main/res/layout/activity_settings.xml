@@ -7,241 +7,230 @@
     android:layout_height="match_parent"
     tools:context=".View.SettingsActivity">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/main"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".View.SettingsActivity"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="-29dp">
+    <RadioGroup
+        android:id="@+id/frequency_radioGroup"
+        android:layout_width="246dp"
+        android:layout_height="123dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.287">
 
-        <RadioGroup
-            android:id="@+id/radioGroup"
-            android:layout_width="246dp"
-            android:layout_height="123dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.279"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.302">
-
-            <RadioButton
-                android:id="@+id/radioButton3"
-                android:layout_width="127dp"
-                android:layout_height="29dp"
-                android:allowUndo="true"
-                android:buttonTint="#76CCD7"
-                android:buttonTintMode="src_in"
-                android:checked="true"
-                android:editable="true"
-                android:minHeight="48dp"
-                android:soundEffectsEnabled="true"
-                android:text="Every Hour"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="14sp"
-                tools:ignore="Deprecated" />
-
-            <RadioButton
-                android:id="@+id/radioButton7"
-                android:layout_width="127dp"
-                android:layout_height="29dp"
-                android:allowUndo="true"
-                android:buttonTint="#76CCD7"
-                android:buttonTintMode="src_in"
-                android:checked="false"
-                android:editable="true"
-                android:minHeight="48dp"
-                android:soundEffectsEnabled="true"
-                android:text="Once a day"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="14sp"
-                tools:ignore="Deprecated" />
-
-            <RadioButton
-                android:id="@+id/radioButton8"
-                android:layout_width="127dp"
-                android:layout_height="29dp"
-                android:allowUndo="true"
-                android:buttonTint="#76CCD7"
-                android:buttonTintMode="src_in"
-                android:checked="false"
-                android:editable="true"
-                android:minHeight="48dp"
-                android:soundEffectsEnabled="true"
-                android:text="Once a week"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="14sp"
-                tools:ignore="Deprecated" />
-
-            <RadioButton
-                android:id="@+id/radioButton9"
-                android:layout_width="127dp"
-                android:layout_height="29dp"
-                android:allowUndo="true"
-                android:buttonTint="#76CCD7"
-                android:buttonTintMode="src_in"
-                android:checked="false"
-                android:editable="true"
-                android:minHeight="48dp"
-                android:soundEffectsEnabled="true"
-                android:text="Once a month"
-                android:textAllCaps="false"
-                android:textAppearance="@style/TextAppearance.AppCompat.Small"
-                android:textSize="14sp"
-                tools:ignore="Deprecated" />
-
-        </RadioGroup>
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Notification History"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.106"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.453" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Notification Frequency"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.119"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.217" />
-
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottom_nav"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:itemIconTint="@null"
-            app:labelVisibilityMode="labeled"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:menu="@menu/bottom_nav" />
-
-        <View
-            android:id="@+id/divider3"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            tools:layout_editor_absoluteX="-16dp"
-            tools:layout_editor_absoluteY="312dp" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Notification Type"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.099"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.111" />
-
-        <CheckBox
-            android:id="@+id/alert_checkBox"
-            android:layout_width="82dp"
-            android:layout_height="28dp"
-            android:buttonTint="@color/white"
-            android:buttonTintMode="multiply"
-            android:text="Alerts"
-            android:textColorLink="#CACACA"
-            app:buttonIconTint="@color/black"
-            app:buttonIconTintMode="screen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.174"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.155" />
-
-        <CheckBox
-            android:id="@+id/reminders_checkBox"
-            android:layout_width="113dp"
-            android:layout_height="29dp"
-            android:buttonTint="@color/white"
-            android:buttonTintMode="multiply"
-            android:text="Reminders"
-            android:textColorLink="#CACACA"
-            app:buttonIconTint="@color/black"
-            app:buttonIconTintMode="screen"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.725"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.154" />
-
-        <View
-            android:id="@+id/divider"
-            android:layout_width="409dp"
-            android:layout_height="1dp"
-            android:background="?android:attr/listDivider"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.47"
-            app:layout_constraintStart_toStartOf="parent"
-            tools:layout_editor_absoluteY="139dp" />
-
-        <ListView
-            android:id="@+id/notificationHistory_lv"
-            android:layout_width="353dp"
-            android:layout_height="290dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.384"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.797" />
-
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar2"
-            android:layout_width="463dp"
-            android:layout_height="68dp"
-            android:background="#61CACACA"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            tools:layout_editor_absoluteX="-4dp"
-            tools:layout_editor_absoluteY="-4dp" />
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="sans-serif"
-            android:text="Notification Settings"
+        <RadioButton
+            android:id="@+id/hourly_rbutton"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:allowUndo="true"
+            android:buttonTint="#76CCD7"
+            android:buttonTintMode="src_in"
+            android:checked="true"
+            android:editable="true"
+            android:minHeight="48dp"
+            android:soundEffectsEnabled="true"
+            android:text="Every Hour"
             android:textAllCaps="false"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.085"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.022" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            tools:ignore="Deprecated" />
+
+        <RadioButton
+            android:id="@+id/daily_rbutton"
+            android:layout_width="match_parent"
+            android:layout_height="31dp"
+            android:allowUndo="true"
+            android:buttonTint="#76CCD7"
+            android:buttonTintMode="src_in"
+            android:checked="false"
+            android:editable="true"
+            android:minHeight="48dp"
+            android:soundEffectsEnabled="true"
+            android:text="Once a day"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            tools:ignore="Deprecated" />
+
+        <RadioButton
+            android:id="@+id/weekly_rbutton"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:allowUndo="true"
+            android:buttonTint="#76CCD7"
+            android:buttonTintMode="src_in"
+            android:checked="false"
+            android:editable="true"
+            android:minHeight="48dp"
+            android:soundEffectsEnabled="true"
+            android:text="Once a week"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            tools:ignore="Deprecated" />
+
+        <RadioButton
+            android:id="@+id/monthly_rbutton"
+            android:layout_width="match_parent"
+            android:layout_height="29dp"
+            android:allowUndo="true"
+            android:buttonTint="#76CCD7"
+            android:buttonTintMode="src_in"
+            android:checked="false"
+            android:editable="true"
+            android:minHeight="48dp"
+            android:soundEffectsEnabled="true"
+            android:text="Once a month"
+            android:textAllCaps="false"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textSize="14sp"
+            tools:ignore="Deprecated" />
+
+    </RadioGroup>
+
+    <View
+        android:id="@+id/divider3"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.363"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.403" />
+
+    <TextView
+        android:id="@+id/notifHistory_tv"
+        android:layout_width="143dp"
+        android:layout_height="28dp"
+        android:fontFamily="sans-serif"
+        android:gravity="center"
+        android:text="Notification History"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.432" />
+
+    <TextView
+        android:id="@+id/notifFrequency_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Notification Frequency"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.204" />
+
+    <TextView
+        android:id="@+id/notifType_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Notification Type"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.105" />
+
+    <CheckBox
+        android:id="@+id/alert_checkBox"
+        android:layout_width="82dp"
+        android:layout_height="28dp"
+        android:buttonTint="@color/white"
+        android:buttonTintMode="multiply"
+        android:text="Alerts"
+        android:textColorLink="#CACACA"
+        app:buttonIconTint="@color/black"
+        app:buttonIconTintMode="screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.173"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <CheckBox
+        android:id="@+id/reminder_checkBox"
+        android:layout_width="113dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="76dp"
+        android:buttonTint="@color/white"
+        android:buttonTintMode="multiply"
+        android:text="Reminders"
+        android:textColorLink="#CACACA"
+        app:buttonIconTint="@color/black"
+        app:buttonIconTintMode="screen"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/alert_checkBox"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.15" />
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="409dp"
+        android:layout_height="1dp"
+        android:background="?android:attr/listDivider"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.545"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.188" />
+
+    <ListView
+        android:id="@+id/notificationHistory_lv"
+        android:layout_width="412dp"
+        android:layout_height="356dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.807" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="463dp"
+        android:layout_height="68dp"
+        android:background="#61CACACA"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/bottom_nav"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/notificationTitle_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif"
+        android:text="Notification Settings"
+        android:textAllCaps="false"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.071"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.022" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"
