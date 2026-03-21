@@ -1,10 +1,10 @@
 package com.example.myapplication.Model;
 
-public class pHData {
+public class PHData {
     private Long id;
     private String userId;
     private String time;
-    private Double ph;
+    private int ph;
 
     public Long getId() {
         return id;
@@ -18,7 +18,7 @@ public class pHData {
         return time;
     }
 
-    public Double getPh() {
+    public int getPh() {
         return ph;
     }
 }

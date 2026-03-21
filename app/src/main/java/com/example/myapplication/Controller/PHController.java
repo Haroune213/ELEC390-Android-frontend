@@ -2,7 +2,7 @@ package com.example.myapplication.Controller;
 
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
-import com.example.myapplication.Model.pHData;
+import com.example.myapplication.Model.PHData;
 
 import java.util.List;
 
@@ -10,21 +10,21 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class pHController {
+public class PHController {
 
     private final ApiService apiService;
-    public pHController() { apiService = ApiClient.getClient().create(ApiService.class);
+    public PHController() { apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public void fetchPhForUser(String userId, pHController.pHCallback callback) {
-        apiService.getPhForUser(userId).enqueue(new Callback<List<pHData>>() {
+    public void fetchPhForUser(String userId, PHController.PHCallback callback) {
+        apiService.getPhForUser(userId).enqueue(new Callback<List<PHData>>() {
             @Override
-            public void onResponse(Call<List<pHData>> call, Response<List<pHData>> response) {
+            public void onResponse(Call<List<PHData>> call, Response<List<PHData>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    List<pHData> ph = response.body();
+                    List<PHData> ph = response.body();
 
                     if (!ph.isEmpty()) {
-                        pHData latest = ph.get(ph.size() - 1);
+                        PHData latest = ph.get(ph.size() - 1);
                         callback.onSuccess(latest);
                     } else {
                         callback.onEmpty();
@@ -35,14 +35,14 @@ public class pHController {
             }
 
             @Override
-            public void onFailure(Call<List<pHData>> call, Throwable t) {
+            public void onFailure(Call<List<PHData>> call, Throwable t) {
                 callback.onError("Error: " + t.getMessage());
             }
         });
     }
 
-    public interface pHCallback {
-        void onSuccess(pHData phData);
+    public interface PHCallback {
+        void onSuccess(PHData phData);
         void onEmpty();
         void onError(String errorMessage);
     }
