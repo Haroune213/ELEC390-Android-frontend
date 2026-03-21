@@ -9,16 +9,16 @@ drawable ic_profile
 drawable ic_settings
 id alert_checkBox
 id bottom_nav
-id button4
-id cancelProfileInfo_btn
+id cancelPoolInfo_btn
 id cancel_btn
 id charts_textView
 id chlorine_button
 id chlorine_radiobtn
 id chlorine_textView
-id confirm_btn
 id confirmation_tv
 id daily_rbutton
+id deleteAccount_button
+id delete_btn
 id divider
 id divider2
 id divider3
@@ -56,6 +56,7 @@ id pH_checkBox6
 id pH_textView
 id passwordEdit2
 id passwordText
+id radioGroup
 id readings_textView
 id registerButton
 id registerButton2

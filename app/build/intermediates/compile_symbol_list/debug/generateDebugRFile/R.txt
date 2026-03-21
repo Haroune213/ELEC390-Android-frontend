@@ -7,16 +7,16 @@ int drawable ic_profile 0x0
 int drawable ic_settings 0x0
 int id alert_checkBox 0x0
 int id bottom_nav 0x0
-int id button4 0x0
-int id cancelProfileInfo_btn 0x0
+int id cancelPoolInfo_btn 0x0
 int id cancel_btn 0x0
 int id charts_textView 0x0
 int id chlorine_button 0x0
 int id chlorine_radiobtn 0x0
 int id chlorine_textView 0x0
-int id confirm_btn 0x0
 int id confirmation_tv 0x0
 int id daily_rbutton 0x0
+int id deleteAccount_button 0x0
+int id delete_btn 0x0
 int id divider 0x0
 int id divider2 0x0
 int id divider3 0x0
@@ -54,6 +54,7 @@ int id pH_checkBox6 0x0
 int id pH_textView 0x0
 int id passwordEdit2 0x0
 int id passwordText 0x0
+int id radioGroup 0x0
 int id readings_textView 0x0
 int id registerButton 0x0
 int id registerButton2 0x0

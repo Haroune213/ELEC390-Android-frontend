@@ -2,6 +2,7 @@ package com.example.myapplication.Model;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Build;
 import androidx.core.app.NotificationCompat;
 import com.example.myapplication.R;
@@ -31,6 +32,16 @@ public class NotificationHelper {
 
         // Create channel for Reminder. default priority.
 
+    }
+
+    public static void saveNotification(Context context, String title, String message) {
+
+        SharedPreferences prefs = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
+
+        String history = prefs.getString("history", "");
+        history = title + ": " + message + "\n" + history;
+
+        prefs.edit().putString("history", history).apply();
     }
 }
 

@@ -1,9 +1,9 @@
 -- Merging decision tree log ---
 manifest
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-33:12
-INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-33:12
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-35:12
+INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:2:1-35:12
 MERGED from [com.google.android.material:material:1.13.0] /Users/amanimagra/.gradle/caches/9.1.0/transforms/4ec3371b527b4b343eb1aebba8b043da/transformed/material-1.13.0/AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/amanimagra/.gradle/caches/9.1.0/transforms/d9a9dc0e8fc50dce1fe7b98b41a89914/transformed/constraintlayout-2.2.1/AndroidManifest.xml:2:1-9:12
 MERGED from [androidx.appcompat:appcompat-resources:1.7.1] /Users/amanimagra/.gradle/caches/9.1.0/transforms/9e54475648efe3ffc979d2deb102cff8/transformed/appcompat-resources-1.7.1/AndroidManifest.xml:2:1-7:12
@@ -59,9 +59,13 @@ uses-permission#android.permission.INTERNET
 ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:4:5-67
 	android:name
 		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:4:22-64
+uses-permission#android.permission.POST_NOTIFICATIONS
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:5:5-77
+	android:name
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:5:22-74
 application
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:5:5-31:19
-INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:5:5-31:19
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:7:5-33:19
+INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:7:5-33:19
 MERGED from [com.google.android.material:material:1.13.0] /Users/amanimagra/.gradle/caches/9.1.0/transforms/4ec3371b527b4b343eb1aebba8b043da/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [com.google.android.material:material:1.13.0] /Users/amanimagra/.gradle/caches/9.1.0/transforms/4ec3371b527b4b343eb1aebba8b043da/transformed/material-1.13.0/AndroidManifest.xml:22:5-20
 MERGED from [androidx.constraintlayout:constraintlayout:2.2.1] /Users/amanimagra/.gradle/caches/9.1.0/transforms/d9a9dc0e8fc50dce1fe7b98b41a89914/transformed/constraintlayout-2.2.1/AndroidManifest.xml:7:5-20
@@ -83,57 +87,57 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/amanimagra/.gradle/c
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.16.0] /Users/amanimagra/.gradle/caches/9.1.0/transforms/4fd129e9dc55d48d8e9bdb7572c8303f/transformed/core-1.16.0/AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:12:9-35
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:14:9-35
 	android:label
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:10:9-41
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:12:9-41
 	android:fullBackupContent
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:8:9-54
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:10:9-54
 	android:roundIcon
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:11:9-54
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:13:9-54
 	android:icon
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:9:9-43
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:11:9-43
 	android:allowBackup
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:6:9-35
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:8:9-35
 	android:theme
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:13:9-51
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:15:9-51
 	android:dataExtractionRules
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:7:9-65
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:9:9-65
 activity#com.example.myapplication.View.RegisterActivity
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:14:9-16:40
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:16:9-18:40
 	android:exported
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:16:13-37
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:18:13-37
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:15:13-50
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:17:13-50
 activity#com.example.myapplication.View.LoginActivity
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:17:9-19:40
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:19:9-21:40
 	android:exported
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:19:13-37
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:21:13-37
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:18:13-47
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:20:13-47
 activity#com.example.myapplication.View.MainActivity
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:20:9-28:20
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:22:9-30:20
 	android:exported
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:22:13-36
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:24:13-36
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:21:13-46
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:23:13-46
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:23:13-27:29
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:25:13-29:29
 action#android.intent.action.MAIN
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:24:17-69
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:26:17-69
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:24:25-66
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:26:25-66
 category#android.intent.category.LAUNCHER
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:26:17-77
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:28:17-77
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:26:27-74
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:28:27-74
 activity#com.example.myapplication.View.ProfileActivity
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:29:9-58
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:31:9-58
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:29:19-55
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:31:19-55
 activity#com.example.myapplication.View.SettingsActivity
-ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:30:9-59
+ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:32:9-59
 	android:name
-		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:30:19-56
+		ADDED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml:32:19-56
 uses-sdk
 INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from /Users/amanimagra/AndroidStudioProjects/Android390/app/src/main/AndroidManifest.xml

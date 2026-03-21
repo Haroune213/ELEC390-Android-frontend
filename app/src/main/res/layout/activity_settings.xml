@@ -25,7 +25,7 @@
             android:allowUndo="true"
             android:buttonTint="#76CCD7"
             android:buttonTintMode="src_in"
-            android:checked="true"
+            android:checked="false"
             android:editable="true"
             android:minHeight="48dp"
             android:soundEffectsEnabled="true"

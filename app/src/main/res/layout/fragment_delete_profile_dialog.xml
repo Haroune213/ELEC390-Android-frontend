@@ -20,8 +20,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.142" />
+            app:layout_constraintTop_toBottomOf="@+id/confirmation_tv"
+            app:layout_constraintVertical_bias="0.021" />
 
         <TextView
             android:id="@+id/confirmation_tv"
@@ -35,10 +35,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.054" />
+            app:layout_constraintVertical_bias="0.081" />
 
         <Button
-            android:id="@+id/confirm_btn"
+            android:id="@+id/delete_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:backgroundTint="#E46B4F"
@@ -47,8 +47,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.804"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.209" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.052" />
 
         <Button
             android:id="@+id/cancel_btn"
@@ -60,8 +60,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.197"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.209" />
+            app:layout_constraintTop_toBottomOf="@+id/textView10"
+            app:layout_constraintVertical_bias="0.052" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

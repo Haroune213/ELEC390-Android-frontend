@@ -3,6 +3,7 @@ package com.example.myapplication.View;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 
 import androidx.activity.EdgeToEdge;
@@ -16,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class ProfileActivity extends AppCompatActivity {
 
+    protected Button logout_button, deleteAccount_button, edit_button;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,22 +29,51 @@ public class ProfileActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-        Button logoutButton = findViewById(R.id.logout_button);
 
+        logout_button = findViewById(R.id.logout_button);
+        deleteAccount_button = findViewById(R.id.deleteAccount_button);
+        edit_button = findViewById(R.id.edit_button);
 
-        logoutButton.setOnClickListener(v -> {
-            // Clear login status
-            SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor editor = prefs.edit();
-            editor.putBoolean("isLoggedIn", false);
-            editor.apply();
+        // Logout
+        logout_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Clear login status
+                SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                SharedPreferences.Editor editor = prefs.edit();
+                editor.putBoolean("isLoggedIn", false);
+                editor.apply();
 
-            Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+                Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                finish();
+
+            }
         });
 
+        // Go to Dialog delete account
+        deleteAccount_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                deleteProfileDialogFragment dialogFragment = new deleteProfileDialogFragment();
+
+                dialogFragment.show(getSupportFragmentManager(), "deleteProfileDialogFragment");
+
+            }
+        });
+
+        // Go to Dialog edit pool information
+        edit_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editPoolInfoDialogFragment dialogFragment = new editPoolInfoDialogFragment();
+                dialogFragment.show(getSupportFragmentManager(), "editPoolInfoDialogFragment");
+
+            }
+        });
+
+        //Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {

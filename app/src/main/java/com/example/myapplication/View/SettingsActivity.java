@@ -36,7 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
 
             alert_checkBox = findViewById(R.id.alert_checkBox);
-            reminder_checkBox = findViewById(R.id.alert_checkBox);
+            reminder_checkBox = findViewById(R.id.reminder_checkBox);
             frequency_radioGroup = findViewById(R.id.frequency_radioGroup);
 
             sharedPreferences = getSharedPreferences("AppPrefs", MODE_PRIVATE);
@@ -58,6 +58,12 @@ public class SettingsActivity extends AppCompatActivity {
             frequency_radioGroup.setOnCheckedChangeListener((group, checkedId) -> {
                 sharedPreferences.edit().putInt("Frequency", checkedId).apply();
             });
+
+            int savedFreq = sharedPreferences.getInt("Frequency", -1);
+
+            if (savedFreq != -1) {
+                frequency_radioGroup.check(savedFreq);
+            }
 
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
