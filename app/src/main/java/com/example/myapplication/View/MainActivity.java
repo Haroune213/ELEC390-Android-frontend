@@ -103,6 +103,8 @@ public class MainActivity extends AppCompatActivity {
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
 
+        // Connect the test buttons to the logic in MaintenanceTaskManager
+        MaintenanceTaskManager.setupTestButtons(findViewById(R.id.btn_start_test), findViewById(R.id.btn_stop_test), this);
     }
 
     @Override
