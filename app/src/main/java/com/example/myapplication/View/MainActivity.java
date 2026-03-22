@@ -16,6 +16,7 @@ import com.example.myapplication.Controller.DepthController;
 import com.example.myapplication.Controller.PHController;
 import com.example.myapplication.Controller.TdsController;
 import com.example.myapplication.Controller.TemperatureController;
+import com.example.myapplication.Model.AlertManager;
 import com.example.myapplication.Model.DepthData;
 import com.example.myapplication.Model.PHData;
 import com.example.myapplication.Model.TdsData;
@@ -42,12 +43,23 @@ public class MainActivity extends AppCompatActivity {
     private DepthController depthController;
     private final Handler refreshHandler = new Handler(Looper.getMainLooper());
 
+    private double temp;
+    private double ph;
+    private double tds;
+    private double depth;
+    private long lastNotificationTime = 0;
+    private static final long NOTIFICATION_COOLDOWN = 5 * 60 * 1000; // 5 minutes
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 1);
+        }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -73,7 +85,6 @@ public class MainActivity extends AppCompatActivity {
             }
             return false;
         });
-
 
         temperatureController = new TemperatureController();
         phController = new PHController();
@@ -155,8 +166,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(TemperatureData temperatureData) {
                 //temp_textView.setText(temperatureData.getTemperature() + " °C");
-                double temp = temperatureData.getTemperature();
+                temp = temperatureData.getTemperature();
                 temp_gauge.setValueAnimated((float) temp);
+                checkAllDataReady();
             }
 
             @Override
@@ -173,13 +185,13 @@ public class MainActivity extends AppCompatActivity {
         private void fetchPh() {
             String userId = "1";
 
-
             phController.fetchPhForUser(userId, new PHController.PHCallback() {
                 @Override
                 public void onSuccess(PHData phData) {
                     //temp_textView.setText(temperatureData.getTemperature() + " °C");
-                    double ph = phData.getPh();
+                    ph = phData.getPh();
                     ph_gauge.setValueAnimated((float) ph);
+                    checkAllDataReady();
                 }
 
                 @Override
@@ -202,8 +214,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onSuccess(TdsData tdsData) {
                 //temp_textView.setText(temperatureData.getTemperature() + " °C");
-                double tds = tdsData.getTds();
+                tds = tdsData.getTds();
                 tds_gauge.setValueAnimated((float) tds);
+                checkAllDataReady();
             }
 
             @Override
@@ -221,13 +234,13 @@ public class MainActivity extends AppCompatActivity {
         private void fetchDepth() {
         String userId = "1";
 
-
         depthController.fetchDepthForUser(userId, new DepthController.DepthCallback() {
             @Override
             public void onSuccess(DepthData depthData) {
                 //temp_textView.setText(temperatureData.getTemperature() + " °C");
-                double depth = depthData.getDepth();
+                depth = depthData.getDepth();
                 depth_gauge.setValueAnimated((float) depth);
+                checkAllDataReady();
             }
 
             @Override
@@ -242,6 +255,23 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void checkAllDataReady() {
+
+        long currentTime = System.currentTimeMillis();
+
+        if (currentTime - lastNotificationTime < NOTIFICATION_COOLDOWN) {
+            return;
+        }
+
+        //float chlorine = tds * 0.0005f;
+        //float salt (formula)
+
+        boolean alertTriggered = AlertManager.checkLevels(this, 10, 2500, ph, depth, tds, temp);
+
+        if (alertTriggered) {
+            lastNotificationTime = currentTime;
+        }
+    }
 
 
 
