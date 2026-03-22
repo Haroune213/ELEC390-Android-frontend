@@ -24,6 +24,15 @@ import com.example.myapplication.Model.TemperatureData;
 import com.example.myapplication.R;
 import com.example.myapplication.UI.GaugeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import android.widget.CheckBox;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.graphics.Color;
+import java.util.Calendar;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
+import android.view.View;
+import com.example.myapplication.Model.MaintenanceTaskManager;
 
 public class MainActivity extends AppCompatActivity {
     protected GaugeView temp_gauge, depth_gauge, ph_gauge, tds_gauge;
@@ -83,6 +92,17 @@ public class MainActivity extends AppCompatActivity {
         depthController = new DepthController();
 
         refreshHandler.post(refreshRunnable);
+
+        // --- MAINTENANCE TASKS LOGIC ---
+        MaintenanceTaskManager.setupTask(this,
+                findViewById(R.id.check_filter), findViewById(R.id.date_filter), findViewById(R.id.layout_filter), 21, "filter cleaning");
+
+        MaintenanceTaskManager.setupTask(this,
+                findViewById(R.id.check_skimmer), findViewById(R.id.date_skimmer), findViewById(R.id.layout_skimmer), 30, "skimmer clearing");
+
+        MaintenanceTaskManager.setupTask(this,
+                findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
+
     }
 
     @Override
@@ -252,5 +272,7 @@ public class MainActivity extends AppCompatActivity {
             lastNotificationTime = currentTime;
         }
     }
+
+
 
 }
