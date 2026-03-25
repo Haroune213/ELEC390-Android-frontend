@@ -40,8 +40,39 @@ public class MainActivity extends AppCompatActivity {
     private double tds;
     private double depth;
     private long lastNotificationTime = 0;
-    private static final long NOTIFICATION_COOLDOWN = 5 * 60 * 1000; // 5 minutes
+    private static final long NOTIFICATION_COOLDOWN = 10  * 1000; // 10 seconds
 
+    // Top of MainActivity
+    private String currentUserId;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        // STOP the loop when the user leaves the screen
+        refreshHandler.removeCallbacks(refreshRunnable);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // RESTART the loop when the user comes back
+        refreshHandler.post(refreshRunnable);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
+
+        if (!isLoggedIn) {
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
+        } else {
+            // Cache the ID once here
+            currentUserId = prefs.getString("userId", "user123");
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,7 +80,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 1);
+            requestPermissions(new String[]{"android.permission.POST_NOTIFICATIONS"}, 101);
         }
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -91,18 +122,6 @@ public class MainActivity extends AppCompatActivity {
         MaintenanceTaskManager.setupTestButtons(findViewById(R.id.btn_start_test), findViewById(R.id.btn_stop_test), this);
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
-
-        if (!isLoggedIn) {
-            startActivity(new Intent(this, LoginActivity.class));
-            finish();
-        }
-    }
-
 
     private String getLoggedInUserId() {
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -118,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             fetchTds(currentUserId);
             fetchDepth(currentUserId);
 
-            refreshHandler.postDelayed(this, 30000); // Rafraîchissement toutes les 30s
+            refreshHandler.postDelayed(this, 10000); // Rafraîchissement toutes les 5s
         }
     };
 
