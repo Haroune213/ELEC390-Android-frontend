@@ -24,14 +24,6 @@ import com.example.myapplication.Model.TemperatureData;
 import com.example.myapplication.R;
 import com.example.myapplication.UI.GaugeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import android.widget.CheckBox;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.graphics.Color;
-import java.util.Calendar;
-import java.text.SimpleDateFormat;
-import java.util.Locale;
-import android.view.View;
 import com.example.myapplication.Model.MaintenanceTaskManager;
 
 public class MainActivity extends AppCompatActivity {
@@ -49,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private double depth;
     private long lastNotificationTime = 0;
     private static final long NOTIFICATION_COOLDOWN = 5 * 60 * 1000; // 5 minutes
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,13 +61,10 @@ public class MainActivity extends AppCompatActivity {
         setupUI();
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
-
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            int id = item.getItemId();  // get the ID of the selected item
-            if (id == R.id.nav_home) {
-                // Already on MainActivity
-                return true;
-            } else if (id == R.id.nav_profile) {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) return true;
+            else if (id == R.id.nav_profile) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
                 return true;
             } else if (id == R.id.nav_settings) {
@@ -93,188 +81,146 @@ public class MainActivity extends AppCompatActivity {
 
         refreshHandler.post(refreshRunnable);
 
-        // --- MAINTENANCE TASKS LOGIC ---
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_filter), findViewById(R.id.date_filter), findViewById(R.id.layout_filter), 21, "filter cleaning");
-
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_skimmer), findViewById(R.id.date_skimmer), findViewById(R.id.layout_skimmer), 30, "skimmer clearing");
-
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
 
-        // Connect the test buttons to the logic in MaintenanceTaskManager
         MaintenanceTaskManager.setupTestButtons(findViewById(R.id.btn_start_test), findViewById(R.id.btn_stop_test), this);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
 
         if (!isLoggedIn) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
     }
 
 
+    private String getLoggedInUserId() {
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        return prefs.getString("userId", "user123");
+    }
+
     private final Runnable refreshRunnable = new Runnable() {
         @Override
         public void run() {
-            fetchTemperature();
-            fetchPh();
-            fetchTds();
-            fetchDepth();
+            String currentUserId = getLoggedInUserId();
+            fetchTemperature(currentUserId);
+            fetchPh(currentUserId);
+            fetchTds(currentUserId);
+            fetchDepth(currentUserId);
 
-            refreshHandler.postDelayed(this, 30000);
+            refreshHandler.postDelayed(this, 30000); // Rafraîchissement toutes les 30s
         }
     };
+
     private void setupUI() {
         temp_gauge = findViewById(R.id.temp_gauge);
         temp_gauge.setTitle("Temperature");
         temp_gauge.setMinValue(0f);
         temp_gauge.setMaxValue(50f);
-        temp_gauge.setRanges(10f, 18f, 30f, 38f);
+        temp_gauge.setRanges(15f, 22f, 28f, 35f); // Valeurs réalistes piscine
 
         depth_gauge = findViewById(R.id.depth_gauge);
         depth_gauge.setTitle("Depth");
         depth_gauge.setMinValue(0f);
         depth_gauge.setMaxValue(200f);
-        depth_gauge.setRanges(160f, 170f, 190f, 195f);
-        depth_gauge.setValueAnimated(182f);
+        depth_gauge.setRanges(150f, 160f, 185f, 195f);
 
         ph_gauge = findViewById(R.id.ph_gauge);
         ph_gauge.setTitle("Ph");
         ph_gauge.setMinValue(0f);
         ph_gauge.setMaxValue(14f);
-        ph_gauge.setRanges(2000f, 2800f, 6000f, 7000f);
+        ph_gauge.setRanges(6.8f, 7.2f, 7.6f, 8.0f); // Plages pH corrigées (0-14)
 
         tds_gauge = findViewById(R.id.tds_gauge);
         tds_gauge.setTitle("TDS");
         tds_gauge.setMinValue(0f);
         tds_gauge.setMaxValue(8000f);
-        tds_gauge.setRanges(10f, 18f, 30f, 38f);
-        tds_gauge.setValueAnimated(2030f);
+        tds_gauge.setRanges(1500f, 2500f, 4500f, 6000f); // Plages TDS corrigées
     }
 
-    private void fetchTemperature() {
-        String userId = "1";
-
+    private void fetchTemperature(String userId) {
         temperatureController.fetchTemperatureForUser(userId, new TemperatureController.TemperatureCallback() {
             @Override
             public void onSuccess(TemperatureData temperatureData) {
-                //temp_textView.setText(temperatureData.getTemperature() + " °C");
                 temp = temperatureData.getTemperature();
                 temp_gauge.setValueAnimated((float) temp);
                 checkAllDataReady();
             }
-
-            @Override
-            public void onEmpty() {
-
-            }
-
+            @Override public void onEmpty() {}
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Temp: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
-        private void fetchPh() {
-            String userId = "1";
 
-            phController.fetchPhForUser(userId, new PHController.PHCallback() {
-                @Override
-                public void onSuccess(PHData phData) {
-                    //temp_textView.setText(temperatureData.getTemperature() + " °C");
-                    ph = phData.getPh();
-                    ph_gauge.setValueAnimated((float) ph);
-                    checkAllDataReady();
-                }
+    private void fetchPh(String userId) {
+        phController.fetchPhForUser(userId, new PHController.PHCallback() {
+            @Override
+            public void onSuccess(PHData phData) {
+                ph = phData.getPh();
+                ph_gauge.setValueAnimated((float) ph);
+                checkAllDataReady();
+            }
+            @Override public void onEmpty() {}
+            @Override
+            public void onError(String errorMessage) {
+                Toast.makeText(MainActivity.this, "pH: " + errorMessage, Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
-                @Override
-                public void onEmpty() {
-
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-                    Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-
-        private void fetchTds() {
-        String userId = "1";
-
-
+    private void fetchTds(String userId) {
         tdsController.fetchTdsForUser(userId, new TdsController.TdsCallback() {
             @Override
             public void onSuccess(TdsData tdsData) {
-                //temp_textView.setText(temperatureData.getTemperature() + " °C");
                 tds = tdsData.getTds();
                 tds_gauge.setValueAnimated((float) tds);
                 checkAllDataReady();
             }
-
-            @Override
-            public void onEmpty() {
-
-            }
-
+            @Override public void onEmpty() {}
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "TDS: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-        private void fetchDepth() {
-        String userId = "1";
-
+    private void fetchDepth(String userId) {
         depthController.fetchDepthForUser(userId, new DepthController.DepthCallback() {
             @Override
             public void onSuccess(DepthData depthData) {
-                //temp_textView.setText(temperatureData.getTemperature() + " °C");
                 depth = depthData.getDepth();
                 depth_gauge.setValueAnimated((float) depth);
                 checkAllDataReady();
             }
-
-            @Override
-            public void onEmpty() {
-
-            }
-
+            @Override public void onEmpty() {}
             @Override
             public void onError(String errorMessage) {
-                Toast.makeText(MainActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, "Depth: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void checkAllDataReady() {
-
         long currentTime = System.currentTimeMillis();
-
         if (currentTime - lastNotificationTime < NOTIFICATION_COOLDOWN) {
             return;
         }
 
-        //float chlorine = tds * 0.0005f;
-        //float salt (formula)
-
         boolean alertTriggered = AlertManager.checkLevels(this, 10, 2500, ph, depth, tds, temp);
-
         if (alertTriggered) {
             lastNotificationTime = currentTime;
         }
     }
-
-
-
 }

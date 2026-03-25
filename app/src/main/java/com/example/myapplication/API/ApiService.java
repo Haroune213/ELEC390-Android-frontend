@@ -31,6 +31,6 @@ public interface ApiService {
     @GET("/api/depth/{userId}")
     Call<List<DepthData>> getDepthForUser(@Path("userId") String userId);
 
-    @GET("/api/depth/{userId}")
+    @GET("/api/ph/{userId}")
     Call<List<PHData>> getPhForUser(@Path("userId") String userId);
 }

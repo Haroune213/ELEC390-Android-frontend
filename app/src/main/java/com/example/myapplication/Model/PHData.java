@@ -4,7 +4,7 @@ public class PHData {
     private Long id;
     private String userId;
     private String time;
-    private int ph;
+    private double ph;
 
     public Long getId() {
         return id;
@@ -18,7 +18,7 @@ public class PHData {
         return time;
     }
 
-    public int getPh() {
+    public double getPh() {
         return ph;
     }
 }
