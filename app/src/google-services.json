@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "844451458873",
+    "project_id": "smartpoolproject-eac95",
+    "storage_bucket": "smartpoolproject-eac95.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:844451458873:android:c208abf020493b489e02e8",
+        "android_client_info": {
+          "package_name": "com.example.myapplication"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBcLEDWfCCfeZeSYDeHqZGqH-8mDORjzXY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
