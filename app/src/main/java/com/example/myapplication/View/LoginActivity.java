@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myapplication.Controller.AuthentificationController;
+// Importations nécessaires en haut du fichier
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.example.myapplication.R;
 
 import java.util.Map;
@@ -41,50 +43,49 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        // Handle Login button click
         loginButton.setOnClickListener(v -> {
             String username = usernameEdit.getText().toString();
             String password = passwordEdit.getText().toString();
 
-            // Basic validation for empty fields
-            if(username.isEmpty() || password.isEmpty()){
+            if (username.isEmpty() || password.isEmpty()) {
                 Toast.makeText(this, "Please enter username and password", Toast.LENGTH_SHORT).show();
                 return;
             }
 
-            // Execute the login request via the controller
-            authenticationController.login(username, password, new AuthentificationController.AuthCallback() {
-                @Override
-                public void onSuccess(Map<String, String> data) {
-                    // Retrieve authentication data sent by the Backend
-                    String token = data.get("token");
+            // 1. Demander le Token à Firebase
+            FirebaseMessaging.getInstance().getToken()
+                    .addOnCompleteListener(task -> {
+                        String fcmToken = "";
+                        if (task.isSuccessful() && task.getResult() != null) {
+                            fcmToken = task.getResult(); // On récupère l'adresse du téléphone
+                        }
 
-                    // Priority: If the backend returns a specific "userId", use it.
-                    // Otherwise, fall back to the "username" as the unique identifier for API requests.
-                    String userId = data.containsKey("userId") ? data.get("userId") : username;
+                        // 2. Envoyer le login avec le jeton récupéré
+                        authenticationController.login(username, password, fcmToken, new AuthentificationController.AuthCallback() {
+                            @Override
+                            public void onSuccess(Map<String, String> data) {
+                                // Ta logique de succès existante (SharedPreferences, etc.)
+                                String token = data.get("token");
+                                String userId = data.containsKey("userId") ? data.get("userId") : username;
 
-                    // Persist session data in SharedPreferences
-                    SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-                    prefs.edit()
-                            .putBoolean("isLoggedIn", true) // Mark user as authenticated
-                            .putString("token", token)      // Store JWT token for future requests
-                            .putString("userId", userId)    // CRITICAL: Used by MainActivity to fetch specific user data
-                            .putString("username", username)
-                            .apply();
+                                SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                                prefs.edit()
+                                        .putBoolean("isLoggedIn", true)
+                                        .putString("token", token)
+                                        .putString("userId", userId)
+                                        .putString("username", username)
+                                        .apply();
 
-                    // Navigate to the dashboard (MainActivity)
-                    startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                                finish();
+                            }
 
-                    // Close LoginActivity so the user cannot navigate back to it via the back button
-                    finish();
-                }
-
-                @Override
-                public void onError(String errorMessage) {
-                    // Display error message from the server (e.g., "Invalid Credentials")
-                    Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
-                }
-            });
+                            @Override
+                            public void onError(String errorMessage) {
+                                Toast.makeText(LoginActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    });
         });
     }
 }

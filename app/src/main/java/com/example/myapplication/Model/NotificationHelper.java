@@ -11,6 +11,21 @@ import com.example.myapplication.R;
 public class NotificationHelper {
 
     private static final String CHANNEL_ID = "alerts_channel";
+    public static void createAlertChannel(Context context) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    CHANNEL_ID,
+                    "Alerts",
+                    NotificationManager.IMPORTANCE_HIGH // <--- FORCE LE POP-UP
+            );
+            channel.setDescription("Critical pool alerts");
+
+            NotificationManager manager = context.getSystemService(NotificationManager.class);
+            if (manager != null) {
+                manager.createNotificationChannel(channel);
+            }
+        }
+    }
     public static void sendNotification(Context context, String title, String message) {
         NotificationManager manager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

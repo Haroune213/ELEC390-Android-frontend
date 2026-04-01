@@ -19,8 +19,10 @@ public class AuthentificationController {
         apiService = ApiClient.getClient().create(ApiService.class);
     }
 
-    public void login(String username, String password, AuthCallback callback) {
-        LoginRequest request = new LoginRequest(username, password);
+    // Ajoute le paramètre String fcmToken ici
+    public void login(String username, String password, String fcmToken, AuthCallback callback) {
+        // Utilise le nouveau constructeur à 3 paramètres défini dans ton modèle LoginRequest
+        LoginRequest request = new LoginRequest(username, password, fcmToken);
 
         apiService.login(request).enqueue(new Callback<Map<String, String>>() {
             @Override
