@@ -1,8 +1,10 @@
 package com.example.myapplication.View;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Toast;
 import android.os.Handler;
 import android.os.Looper;
@@ -11,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import android.widget.ImageView;
 
 import com.example.myapplication.Controller.DepthController;
 import com.example.myapplication.Controller.PHController;
@@ -85,6 +88,38 @@ public class MainActivity extends AppCompatActivity {
 
         setupUI();
 
+        ImageView infoBtn = findViewById(R.id.info); // Ensure this ID matches your info icon in activity_main.xml
+
+        infoBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 1. Create the dialog using the dialog_info_box XML
+                final Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.dialog_info_box);
+
+                // 2. Set the custom dimensions (360dp x 480dp)
+                if (dialog.getWindow() != null) {
+                    int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
+                    int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
+                    dialog.getWindow().setLayout(widthInPx, heightInPx);
+
+                    // Make background transparent so your XML corners show correctly
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                }
+
+                // 3. Set up the Arrow vector to close the dialog
+                ImageView arrowClose = dialog.findViewById(R.id.arrow);
+                arrowClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss(); // Closes the popup
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
@@ -113,7 +148,6 @@ public class MainActivity extends AppCompatActivity {
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
 
-        MaintenanceTaskManager.setupTestButtons(findViewById(R.id.btn_start_test), findViewById(R.id.btn_stop_test), this);
     }
 
     private String getLoggedInUserId() {

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="350dp"
+    android:layout_height="480dp"
+    android:background="@drawable/dialog_rounded_bg"
+    android:layout_gravity="center"
+    android:padding="5dp"
+    app:flow_horizontalAlign="center"
+    tools:context=".View.editPoolInfoDialogFragment">
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:text="@string/pool_health_guide"
+        android:textSize="22sp"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/arrow"
+        android:layout_width="27dp"
+        android:layout_height="27dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="23dp"
+        android:layout_marginTop="25dp"
+        android:contentDescription="@string/backarrow"
+        android:rotation="90"
+        android:src="@drawable/ic_arrow_" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="@string/ph_level"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="290dp"
+        android:layout_height="63dp"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/a_balanced_ph_prevents_eye_sting_and_makes_sure_your_chemicals_actually_work_to_kill_germs"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/tds_total_dissolved_solids"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="289dp"
+        android:layout_height="78dp"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/high_tds_makes_water_look_dull_and_creates_crusty_scale_buildup_on_your_pool_walls_make_sure_to_keep_it_below_2000_ppm"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView3"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="22dp"
+        android:text="@string/water_leveel"
+        android:textSize="18sp"
+        android:textStyle="bold" />
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="289dp"
+        android:layout_height="78dp"
+        android:layout_below="@+id/textView5"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="@string/aim_for_the_middle_of_the_skimmer_opening_about_3_inches_below_the_edge_this_allows_the_pool_to_clean_itself_of_floating_debris_and_prevents_the_pump_from_sucking_in_air_and_burning_out"
+        android:textSize="16sp" />
+
+</RelativeLayout>

@@ -64,6 +64,7 @@ public class RegisterActivity extends AppCompatActivity {
                             prefs.edit()
                                     .putBoolean("isLoggedIn", true)
                                     .putString("username", username)
+                                    .putString("email", email)
                                     .putString("token", token)
                                     .apply();
 

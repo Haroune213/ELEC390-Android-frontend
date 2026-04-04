@@ -47,4 +47,19 @@ public class editPoolInfoDialogFragment extends DialogFragment {
 
         return view;
     }
+    @Override
+    public void onStart() {
+        super.onStart();
+        if (getDialog() != null && getDialog().getWindow() != null) {
+            // Converts DP to Pixels so it looks the same on all screens
+            int widthInPx = (int) (360 * getResources().getDisplayMetrics().density);
+            int heightInPx = (int) (480 * getResources().getDisplayMetrics().density);
+
+            getDialog().getWindow().setLayout(widthInPx, heightInPx);
+
+            // Makes the background transparent so your XML background shows correctly
+            getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+        }
+    }
+
 }
