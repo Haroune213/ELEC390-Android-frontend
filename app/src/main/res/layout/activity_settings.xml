@@ -11,20 +11,18 @@
         android:id="@+id/frequency_radioGroup"
         android:layout_width="246dp"
         android:layout_height="123dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.236"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287">
+        app:layout_constraintVertical_bias="0.204"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/notifFrequency_tv">
 
         <RadioButton
             android:id="@+id/hourly_rbutton"
             android:layout_width="match_parent"
             android:layout_height="30dp"
             android:allowUndo="true"
-            android:buttonTint="#76CCD7"
-            android:buttonTintMode="src_in"
             android:checked="false"
             android:editable="true"
             android:minHeight="48dp"
@@ -40,8 +38,6 @@
             android:layout_width="match_parent"
             android:layout_height="31dp"
             android:allowUndo="true"
-            android:buttonTint="#76CCD7"
-            android:buttonTintMode="src_in"
             android:checked="false"
             android:editable="true"
             android:minHeight="48dp"
@@ -57,8 +53,6 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:allowUndo="true"
-            android:buttonTint="#76CCD7"
-            android:buttonTintMode="src_in"
             android:checked="false"
             android:editable="true"
             android:minHeight="48dp"
@@ -74,8 +68,6 @@
             android:layout_width="match_parent"
             android:layout_height="29dp"
             android:allowUndo="true"
-            android:buttonTint="#76CCD7"
-            android:buttonTintMode="src_in"
             android:checked="false"
             android:editable="true"
             android:minHeight="48dp"
@@ -93,28 +85,24 @@
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.363"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.403" />
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/frequency_radioGroup" />
 
     <TextView
         android:id="@+id/notifHistory_tv"
-        android:layout_width="143dp"
-        android:layout_height="28dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="Notification History"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.108"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.432" />
+        app:layout_constraintVertical_bias="0.204"
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/divider3" />
 
     <TextView
         android:id="@+id/notifFrequency_tv"
@@ -124,12 +112,12 @@
         android:text="Notification Frequency"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.204" />
+        app:layout_constraintVertical_bias="0.204"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
     <TextView
         android:id="@+id/notifType_tv"
@@ -139,68 +127,52 @@
         android:text="Notification Type"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.101"
+        app:layout_constraintHorizontal_bias="0.117"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.105" />
+        app:layout_constraintVertical_bias="0.204"
+        android:layout_marginTop="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar2" />
 
     <CheckBox
         android:id="@+id/alert_checkBox"
         android:layout_width="82dp"
         android:layout_height="28dp"
-        android:buttonTint="@color/white"
-        android:buttonTintMode="multiply"
         android:text="Alerts"
         android:textColorLink="#CACACA"
-        app:buttonIconTint="@color/black"
-        app:buttonIconTintMode="screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.173"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <CheckBox
         android:id="@+id/reminder_checkBox"
         android:layout_width="113dp"
         android:layout_height="29dp"
         android:layout_marginStart="76dp"
-        android:buttonTint="@color/white"
-        android:buttonTintMode="multiply"
         android:text="Reminders"
         android:textColorLink="#CACACA"
-        app:buttonIconTint="@color/black"
-        app:buttonIconTintMode="screen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/alert_checkBox"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.15" />
+        app:layout_constraintVertical_bias="0.16" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.545"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.188" />
+        android:layout_marginTop="22dp"
+        app:layout_constraintTop_toBottomOf="@+id/alert_checkBox" />
 
     <ListView
         android:id="@+id/notificationHistory_lv"
         android:layout_width="412dp"
         android:layout_height="356dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.807" />
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/notifHistory_tv" />
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
@@ -225,12 +197,11 @@
         android:textAllCaps="false"
         android:textSize="20sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/toolbar2"
+        app:layout_constraintTop_toTopOf="@+id/toolbar2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.071"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.022" />
+        app:layout_constraintHorizontal_bias="0.085"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_nav"

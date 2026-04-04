@@ -22,7 +22,7 @@
         android:layout_height="37dp"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="18dp"
         android:contentDescription="@string/info"
         android:src="@drawable/ic_info"
         app:layout_constraintTop_toTopOf="@+id/toolbar3"
@@ -37,14 +37,13 @@
         android:layout_height="wrap_content"
         android:fontFamily="sans-serif"
         android:text="@string/my_pool"
-        android:textColor="@color/black"
-        android:textSize="20sp"
+        android:textSize="25sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/toolbar3"
+        app:layout_constraintTop_toTopOf="@+id/toolbar3"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/toolbar3" />
+        app:layout_constraintHorizontal_bias="0.1"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ScrollView
         android:id="@+id/main_scroll_view"

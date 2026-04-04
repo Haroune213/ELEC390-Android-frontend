@@ -72,6 +72,39 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
+        // 1. Initialize the button from activity_profile.xml
+        Button editPrefsButton = findViewById(R.id.edit_button3);
+
+        editPrefsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 2. Create the Dialog
+                Dialog dialog = new Dialog(ProfileActivity.this);
+                dialog.setContentView(R.layout.dialog_edit_preferences);
+
+                // 3. Set Fixed Dimensions (375dp x 500dp)
+                int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
+                int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
+
+                if (dialog.getWindow() != null) {
+                    dialog.getWindow().setLayout(widthInPx, heightInPx);
+                    // Optional: Make the background transparent if your XML has rounded corners
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                }
+
+                // 4. Activate the Cancel Button inside the dialog
+                Button cancelButton = dialog.findViewById(R.id.cancelPoolInfo_btn);
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss(); // Closes the dialog
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
 
 
         logout_button = findViewById(R.id.logout_button);
