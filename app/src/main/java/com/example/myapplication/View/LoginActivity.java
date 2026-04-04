@@ -67,6 +67,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // Ta logique de succès existante (SharedPreferences, etc.)
                                 String token = data.get("token");
                                 String userId = data.containsKey("userId") ? data.get("userId") : username;
+                                String email = data.get("email");
 
                                 SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
                                 prefs.edit()
@@ -74,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
                                         .putString("token", token)
                                         .putString("userId", userId)
                                         .putString("username", username)
+                                        .putString("email", email)
                                         .apply();
 
                                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
