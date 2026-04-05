@@ -47,7 +47,7 @@ public class editProfileInfoDialogFragment extends DialogFragment {
         Button   saveBtn      = view.findViewById(R.id.save_button);
         Button   cancelBtn    = view.findViewById(R.id.cancel_button);
 
-        // Pré-remplir avec les valeurs actuelles
+        // Change with current values
         SharedPreferences prefs = requireActivity()
                 .getSharedPreferences("MyAppPrefs", requireActivity().MODE_PRIVATE);
         usernameEdit.setText(prefs.getString("username", ""));
@@ -60,9 +60,10 @@ public class editProfileInfoDialogFragment extends DialogFragment {
             String newEmail    = emailEdit.getText().toString().trim();
             String userId      = prefs.getString("userId", "");
 
-            if (newUsername.isEmpty() || newEmail.isEmpty()) {
+            // Only username is mandatory
+            if (newUsername.isEmpty()) {
                 Toast.makeText(getContext(),
-                        "Please fill all fields", Toast.LENGTH_SHORT).show();
+                        "Username cannot be empty", Toast.LENGTH_SHORT).show();
                 return;
             }
 
@@ -73,23 +74,34 @@ public class editProfileInfoDialogFragment extends DialogFragment {
                         public void onResponse(Call<Map<String, String>> call,
                                                Response<Map<String, String>> response) {
                             if (response.isSuccessful()) {
-                                // Mettre à jour SharedPreferences
                                 prefs.edit()
                                         .putString("username", newUsername)
                                         .putString("email", newEmail)
                                         .apply();
-
-                                // Notifier ProfileActivity de rafraîchir l'affichage
                                 if (listener != null) {
                                     listener.onProfileUpdated(newUsername, newEmail);
                                 }
-
                                 Toast.makeText(getContext(),
                                         "Profile updated!", Toast.LENGTH_SHORT).show();
                                 dismiss();
-                            } else {
-                                Toast.makeText(getContext(),
-                                        "Update failed: " + response.code(), Toast.LENGTH_SHORT).show();
+                            } else if (response.code() == 400) {
+                                // Read backend error
+                                try {
+                                    String errorBody = response.errorBody().string();
+                                    if (errorBody.contains("Username")) {
+                                        Toast.makeText(getContext(),
+                                                "Username already taken", Toast.LENGTH_SHORT).show();
+                                    } else if (errorBody.contains("Email")) {
+                                        Toast.makeText(getContext(),
+                                                "Email already taken", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getContext(),
+                                                "Update failed", Toast.LENGTH_SHORT).show();
+                                    }
+                                } catch (Exception e) {
+                                    Toast.makeText(getContext(),
+                                            "Update failed", Toast.LENGTH_SHORT).show();
+                                }
                             }
                         }
                         @Override

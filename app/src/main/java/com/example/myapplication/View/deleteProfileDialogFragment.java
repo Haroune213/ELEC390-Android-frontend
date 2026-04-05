@@ -58,12 +58,12 @@ public class deleteProfileDialogFragment extends DialogFragment {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        // Effacer la session locale
+                        // Delete local session
                         prefs.edit().clear().apply();
                         Toast.makeText(getContext(),
                                 "Account deleted", Toast.LENGTH_SHORT).show();
 
-                        // Retourner au login
+                        // Return to login page
                         Intent intent = new Intent(requireActivity(), LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);

@@ -3,6 +3,7 @@ package com.example.myapplication.API;
 import com.example.myapplication.Model.Alert;
 import com.example.myapplication.Model.DepthData;
 import com.example.myapplication.Model.LoginRequest;
+import com.example.myapplication.Model.PoolInfo;
 import com.example.myapplication.Model.RegisterRequest;
 import com.example.myapplication.Model.TdsData;
 import com.example.myapplication.Model.TemperatureData;
@@ -63,4 +64,13 @@ public interface ApiService {
 
     @GET("/api/alerts/{userId}")
     Call<List<Alert>> getAlertsForUser(@Path("userId") String userId);
+
+    @GET("/api/pool/{userId}")
+    Call<PoolInfo> getPoolInfo(@Path("userId") String userId);
+
+    @PUT("/api/pool/{userId}")
+    Call<Map<String, String>> updatePoolInfo(
+            @Path("userId") String userId,
+            @Body PoolInfo body
+    );
 }

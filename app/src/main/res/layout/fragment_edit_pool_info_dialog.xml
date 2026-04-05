@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="500dp"
+    android:layout_height="460dp"
     android:layout_gravity="center"
     android:background="@drawable/dialog_rounded_bg"
-    android:padding="5dp"
-    tools:context=".View.editPoolInfoDialogFragment">
+    android:padding="5dp">
 
     <TextView
         android:id="@+id/textView4"
@@ -15,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="@string/edit_pool_informations"
+        android:text="Edit Pool Information"
         android:textSize="20sp"
         android:textStyle="bold" />
 
@@ -30,7 +28,7 @@
         android:backgroundTint="#CACACA"
         android:textColor="#303A38"
         android:textStyle="bold"
-        android:text="@string/cancel" />
+        android:text="Cancel" />
 
     <Button
         android:id="@+id/savePoolInfo_btn"
@@ -43,7 +41,7 @@
         android:backgroundTint="#76CCD7"
         android:textColor="#303A38"
         android:textStyle="bold"
-        android:text="@string/save" />
+        android:text="Save" />
 
     <ScrollView
         android:id="@+id/dialog_scroll_view"
@@ -54,189 +52,151 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingHorizontal="20dp"
             android:paddingBottom="20dp">
 
+            <!-- Pool Type -->
             <TextView
-                android:id="@+id/textView"
-                android:layout_width="105dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="20dp"
-                android:layout_toStartOf="@+id/radioGroup"
-                android:text="@string/pool_typee"
-                android:textSize="16sp" />
-
-            <RadioGroup
-                android:id="@+id/radioGroup"
-                android:layout_width="140dp"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
-                android:layout_marginTop="20dp">
-
-                <RadioButton
-                    android:id="@+id/chlorine_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:checked="true"
-                    android:text="@string/chlorine"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/salt_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:text="@string/salt"
-                    android:textSize="16sp" />
-            </RadioGroup>
-
-            <TextView
-                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/radioGroup"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="35dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="7dp"
-                android:layout_toStartOf="@+id/editTextText2"
-                android:text="@string/pool_dimension"
-                android:textSize="16sp" />
+                android:layout_marginBottom="8dp"
+                android:text="Pool Type"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#303A38"/>
 
-            <EditText
-                android:id="@+id/editTextText"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/radioGroup"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="35dp"
-                android:layout_marginTop="10dp"
-                android:autofillHints=""
-                android:hint="@string/width"
-                android:inputType="text"
-                android:textSize="15sp" />
+            <Spinner
+                android:id="@+id/spinner_pool_type"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/card_unselected"
+                android:paddingHorizontal="12dp"/>
 
-            <EditText
-                android:id="@+id/editTextText2"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/editTextText"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="35dp"
-                android:autofillHints=""
-                android:hint="@string/depth"
-                android:inputType="text"
-                android:textSize="15sp" />
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="4dp"
+                android:background="?android:attr/listDivider"/>
 
-            <EditText
-                android:id="@+id/editTextText3"
-                android:layout_width="130dp"
-                android:layout_height="40dp"
-                android:layout_below="@id/editTextText2"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="35dp"
-                android:autofillHints=""
-                android:hint="@string/lenght"
-                android:inputType="text"
-                android:textSize="15sp" />
-
+            <!-- Dimensions -->
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="70dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextText3"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="55dp"
-                android:layout_toStartOf="@+id/units_radioGroup"
-                android:text="@string/unit"
-                android:textSize="17sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="10dp"
+                android:text="Dimensions"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#303A38"/>
 
-            <RadioGroup
-                android:id="@+id/units_radioGroup"
-                android:layout_width="140dp"
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/editTextText3"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
-                android:layout_marginTop="13dp">
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
 
-                <RadioButton
-                    android:id="@+id/feets_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:checked="true"
-                    android:text="@string/feets_ft"
-                    android:textSize="16sp" />
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Width"
+                    android:textSize="14sp"
+                    android:textColor="#555555"/>
 
-                <RadioButton
-                    android:id="@+id/meter_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:text="@string/meters_m"
-                    android:textSize="16sp" />
-            </RadioGroup>
+                <EditText
+                    android:id="@+id/editTextText"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:hint="e.g. 5"
+                    android:inputType="numberDecimal"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="8dp"/>
+            </LinearLayout>
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Depth"
+                    android:textSize="14sp"
+                    android:textColor="#555555"/>
+
+                <EditText
+                    android:id="@+id/editTextText2"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:hint="e.g. 2"
+                    android:inputType="numberDecimal"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="8dp"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginBottom="8dp">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="wrap_content"
+                    android:text="Length"
+                    android:textSize="14sp"
+                    android:textColor="#555555"/>
+
+                <EditText
+                    android:id="@+id/editTextText3"
+                    android:layout_width="0dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="1"
+                    android:hint="e.g. 10"
+                    android:inputType="numberDecimal"
+                    android:textSize="14sp"
+                    android:paddingHorizontal="8dp"/>
+            </LinearLayout>
+
+            <!-- Divider -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="4dp"
+                android:background="?android:attr/listDivider"/>
+
+            <!-- Units -->
             <TextView
-                android:id="@+id/textView5"
-                android:layout_width="130dp"
-                android:layout_height="39dp"
-                android:layout_below="@+id/units_radioGroup"
-                android:layout_alignParentStart="true"
-                android:layout_marginStart="35dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginEnd="-5dp"
-                android:layout_toStartOf="@+id/units_radioGroup"
-                android:text="@string/chlorine_type"
-                android:textSize="17sp" />
-
-            <RadioGroup
-                android:id="@+id/ctype_radioGroup"
-                android:layout_width="140dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/units_radioGroup"
-                android:layout_alignParentEnd="true"
-                android:layout_marginEnd="30dp"
-                android:layout_marginTop="13dp">
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="8dp"
+                android:text="Units"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:textColor="#303A38"/>
 
-                <RadioButton
-                    android:id="@+id/liquid_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:checked="true"
-                    android:text="@string/liquid"
-                    android:textSize="16sp" />
+            <Spinner
+                android:id="@+id/spinner_units"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:background="@drawable/card_unselected"
+                android:paddingHorizontal="12dp"/>
 
-                <RadioButton
-                    android:id="@+id/grain_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:text="@string/grain"
-                    android:textSize="16sp" />
-
-                <RadioButton
-                    android:id="@+id/tablet_radiobtn"
-                    android:layout_width="match_parent"
-                    android:layout_height="35dp"
-                    android:buttonTint="#76CCD7"
-                    android:text="@string/tablet"
-                    android:textSize="16sp" />
-            </RadioGroup>
-
-
-        </RelativeLayout>
+        </LinearLayout>
     </ScrollView>
-
 </RelativeLayout>

@@ -19,6 +19,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.widget.ImageView;
 
+import com.example.myapplication.API.ApiClient;
+import com.example.myapplication.API.ApiService;
 import com.example.myapplication.Controller.DepthController;
 import com.example.myapplication.Controller.PHController;
 import com.example.myapplication.Controller.TdsController;
@@ -28,10 +30,15 @@ import com.example.myapplication.Model.NotificationHelper;
 import com.example.myapplication.Model.PHData;
 import com.example.myapplication.Model.TdsData;
 import com.example.myapplication.Model.TemperatureData;
+import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
 import com.example.myapplication.UI.GaugeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.myapplication.Model.MaintenanceTaskManager;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     protected GaugeView temp_gauge, depth_gauge, ph_gauge, tds_gauge;
@@ -241,29 +248,97 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private void setupUI() {
-        temp_gauge = findViewById(R.id.temp_gauge);
+        temp_gauge  = findViewById(R.id.temp_gauge);
+        depth_gauge = findViewById(R.id.depth_gauge);
+        ph_gauge    = findViewById(R.id.ph_gauge);
+        tds_gauge   = findViewById(R.id.tds_gauge);
+
+        // Titles
         temp_gauge.setTitle("Temperature");
-        temp_gauge.setMinValue(0f);
-        temp_gauge.setMaxValue(50f);
+        depth_gauge.setTitle("Depth");
+        ph_gauge.setTitle("pH");
+        tds_gauge.setTitle("TDS");
+
+        // Ranges by default
+        applyDefaultRanges();
+
+        // Fetch preferences to update ranges
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String userId = prefs.getString("userId", "");
+
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
+            @Override
+            public void onResponse(Call<UserPreferences> call,
+                                   Response<UserPreferences> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserPreferences p = response.body();
+                    applyPreferencesToGauges(p);
+                }
+            }
+            @Override
+            public void onFailure(Call<UserPreferences> call, Throwable t) {
+                // Keep default ranges if fail
+            }
+        });
+    }
+
+    private void applyDefaultRanges() {
+        temp_gauge.setMinValue(0f);   temp_gauge.setMaxValue(50f);
         temp_gauge.setRanges(15f, 22f, 28f, 35f);
 
-        depth_gauge = findViewById(R.id.depth_gauge);
-        depth_gauge.setTitle("Depth");
-        depth_gauge.setMinValue(0f);
-        depth_gauge.setMaxValue(200f);
-        depth_gauge.setRanges(150f, 160f, 185f, 195f);
+        depth_gauge.setMinValue(0f);  depth_gauge.setMaxValue(5f);
+        depth_gauge.setRanges(0.5f, 1f, 2f, 4f);
 
-        ph_gauge = findViewById(R.id.ph_gauge);
-        ph_gauge.setTitle("Ph");
-        ph_gauge.setMinValue(0f);
-        ph_gauge.setMaxValue(14f);
+        ph_gauge.setMinValue(0f);     ph_gauge.setMaxValue(14f);
         ph_gauge.setRanges(6.8f, 7.2f, 7.6f, 8.0f);
 
-        tds_gauge = findViewById(R.id.tds_gauge);
-        tds_gauge.setTitle("TDS");
-        tds_gauge.setMinValue(0f);
-        tds_gauge.setMaxValue(8000f);
-        tds_gauge.setRanges(1500f, 2500f, 4500f, 6000f);
+        tds_gauge.setMinValue(0f);    tds_gauge.setMaxValue(3000f);
+        tds_gauge.setRanges(0f, 500f, 1500f, 2500f);
+    }
+
+    private void applyPreferencesToGauges(UserPreferences p) {
+        if (p.getTempMin() != null && p.getTempMax() != null) {
+            temp_gauge.setMinValue(0f);
+            temp_gauge.setMaxValue(40f);
+            // low danger | low ok | high ok | high danger
+            temp_gauge.setRanges(
+                    p.getTempMin().floatValue() - 5f,
+                    p.getTempMin().floatValue(),
+                    p.getTempMax().floatValue(),
+                    p.getTempMax().floatValue() + 5f
+            );
+        }
+        if (p.getPhMin() != null && p.getPhMax() != null) {
+            ph_gauge.setMinValue(0f);
+            ph_gauge.setMaxValue(14f);
+            ph_gauge.setRanges(
+                    p.getPhMin().floatValue() - 0.5f,
+                    p.getPhMin().floatValue(),
+                    p.getPhMax().floatValue(),
+                    p.getPhMax().floatValue() + 0.5f
+            );
+        }
+        if (p.getTdsMin() != null && p.getTdsMax() != null) {
+            tds_gauge.setMinValue(0f);
+            tds_gauge.setMaxValue(3000f);
+            tds_gauge.setRanges(
+                    p.getTdsMin().floatValue() - 100f,
+                    p.getTdsMin().floatValue(),
+                    p.getTdsMax().floatValue(),
+                    p.getTdsMax().floatValue() + 100f
+            );
+        }
+        if (p.getDepthMin() != null && p.getDepthMax() != null) {
+            depth_gauge.setMinValue(0f);
+            depth_gauge.setMaxValue(5f);
+            depth_gauge.setRanges(
+                    p.getDepthMin().floatValue() - 0.2f,
+                    p.getDepthMin().floatValue(),
+                    p.getDepthMax().floatValue(),
+                    p.getDepthMax().floatValue() + 0.2f
+            );
+        }
     }
 
     private void fetchTemperature(String userId) {

@@ -14,6 +14,7 @@ import androidx.fragment.app.DialogFragment;
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
 import com.example.myapplication.Model.UpdatePreferencesRequest;
+import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
 
 import java.util.Map;
@@ -77,7 +78,36 @@ public class editPreferencesDialogFragment extends DialogFragment {
         Button cancelBtn = view.findViewById(R.id.cancelPoolInfo_btn);
         Button resetBtn = view.findViewById(R.id.reset_defaults_btn);
 
-        // Buttons logic
+        // Fills values in TextEdits with current values.
+        SharedPreferences prefs = requireActivity()
+                .getSharedPreferences("MyAppPrefs", requireActivity().MODE_PRIVATE);
+        String userId = prefs.getString("userId", "");
+
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
+            @Override
+            public void onResponse(Call<UserPreferences> call,
+                                   Response<UserPreferences> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserPreferences p = response.body();
+                    // If value exists, fill
+                    if (p.getTempMin() != null) tempMin.setText(String.valueOf(p.getTempMin()));
+                    if (p.getTempMax() != null) tempMax.setText(String.valueOf(p.getTempMax()));
+                    if (p.getPhMin()   != null) phMin.setText(String.valueOf(p.getPhMin()));
+                    if (p.getPhMax()   != null) phMax.setText(String.valueOf(p.getPhMax()));
+                    if (p.getTdsMin()  != null) tdsMin.setText(String.valueOf(p.getTdsMin()));
+                    if (p.getTdsMax()  != null) tdsMax.setText(String.valueOf(p.getTdsMax()));
+                    if (p.getDepthMin()!= null) depthMin.setText(String.valueOf(p.getDepthMin()));
+                    if (p.getDepthMax()!= null) depthMax.setText(String.valueOf(p.getDepthMax()));
+                }
+            }
+            @Override
+            public void onFailure(Call<UserPreferences> call, Throwable t) {
+                // Keep fields empty if nothing.
+            }
+        });
+
+        // Buttons logic (reset,  cancel and save)
         resetBtn.setOnClickListener(v -> resetToDefaults());
         cancelBtn.setOnClickListener(v -> dismiss());
 
@@ -86,10 +116,6 @@ public class editPreferencesDialogFragment extends DialogFragment {
             if (!validateAll())
                 return;
 
-            SharedPreferences prefs = requireActivity()
-                    .getSharedPreferences("MyAppPrefs", requireActivity().MODE_PRIVATE);
-            String userId = prefs.getString("userId", "");
-
             UpdatePreferencesRequest request = new UpdatePreferencesRequest(
                     parseDouble(tempMin), parseDouble(tempMax),
                     parseDouble(phMin),   parseDouble(phMax),
@@ -97,7 +123,6 @@ public class editPreferencesDialogFragment extends DialogFragment {
                     parseDouble(depthMin),parseDouble(depthMax)
                 );
 
-            ApiService api = ApiClient.getClient().create(ApiService.class);
             api.updatePreferences(userId, request)
                     .enqueue(new Callback<Map<String, String>>() {
                         @Override

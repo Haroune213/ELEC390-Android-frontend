@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
+import com.example.myapplication.Model.PoolInfo;
 import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,7 +28,7 @@ import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    protected Button logout_button, deleteAccount_button, edit_button, edit_profile_details_button;;
+    protected Button logout_button, deleteAccount_button, edit_button, edit_profile_details_button, editPrefsButton;;
 
 
     @SuppressLint("SetTextI18n")
@@ -51,6 +52,18 @@ public class ProfileActivity extends AppCompatActivity {
         TextView depthValue = findViewById(R.id.textView23);
         TextView tdsValue   = findViewById(R.id.textView26);
         TextView phValue    = findViewById(R.id.textView28);
+
+        // Pool Info
+        TextView typeValue      = findViewById(R.id.type_value);
+        TextView dimensionValue = findViewById(R.id.dimension_value);
+        TextView unitsValue     = findViewById(R.id.units_value);
+
+        // Buttons
+        logout_button = findViewById(R.id.logout_button);
+        deleteAccount_button = findViewById(R.id.deleteAccount_button);
+        edit_button = findViewById(R.id.edit_button);
+        edit_profile_details_button = findViewById(R.id.edit_button2);
+        editPrefsButton = findViewById(R.id.edit_button3);
 
         // Save email+username
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -77,14 +90,27 @@ public class ProfileActivity extends AppCompatActivity {
             }
             @Override
             public void onFailure(Call<UserPreferences> call, Throwable t) {
-                // Garder "Loading..." si pas de connexion
+                // Keep "Loading..." if no connection
             }
         });
 
-        // Initialize the button for User Info (the one next to email/username)
-        edit_profile_details_button = findViewById(R.id.edit_button2);
+        // Charge pool info from API when app starts
+        api.getPoolInfo(userId).enqueue(new Callback<PoolInfo>() {
+            @Override
+            public void onResponse(Call<PoolInfo> call, Response<PoolInfo> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    PoolInfo p = response.body();
+                    typeValue.setText(p.getPoolType());
+                    dimensionValue.setText(p.getWidth() + " x " + p.getLength()
+                            + " x " + p.getDepth());
+                    unitsValue.setText(p.getUnit());
+                }
+            }
+            @Override
+            public void onFailure(Call<PoolInfo> call, Throwable t) {}
+        });
 
-        // Logic for the popup
+        // Button initialization: User Info
         edit_profile_details_button.setOnClickListener(v -> {
             editProfileInfoDialogFragment dialog = new editProfileInfoDialogFragment();
 
@@ -97,8 +123,7 @@ public class ProfileActivity extends AppCompatActivity {
             dialog.show(getSupportFragmentManager(), "editProfileInfo");
         });
 
-        // 1. Initialize the button from activity_profile.xml
-        Button editPrefsButton = findViewById(R.id.edit_button3);
+        // Button initialization: User Preferences
         editPrefsButton.setOnClickListener(v -> {
             editPreferencesDialogFragment dialog = new editPreferencesDialogFragment();
 
@@ -113,11 +138,7 @@ public class ProfileActivity extends AppCompatActivity {
             dialog.show(getSupportFragmentManager(), "editPreferences");
         });
 
-        logout_button = findViewById(R.id.logout_button);
-        deleteAccount_button = findViewById(R.id.deleteAccount_button);
-        edit_button = findViewById(R.id.edit_button);
-
-        // Logout
+        // Button initialization: Logout
         logout_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +156,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Go to Dialog delete account
+        // Button initialization: Go to Dialog delete account
         deleteAccount_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,17 +167,18 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Go to Dialog edit pool information
-        edit_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                editPoolInfoDialogFragment dialogFragment = new editPoolInfoDialogFragment();
-                dialogFragment.show(getSupportFragmentManager(), "editPoolInfoDialogFragment");
-
-            }
+        // Button initialization: Go to Dialog edit pool information, callback after save info
+        edit_button.setOnClickListener(v -> {
+            editPoolInfoDialogFragment dialog = new editPoolInfoDialogFragment();
+            dialog.setOnPoolInfoUpdatedListener((type, width, depth, length, unit) -> {
+                typeValue.setText(type);
+                dimensionValue.setText(width + " x " + length + " x " + depth);
+                unitsValue.setText(unit);
+            });
+            dialog.show(getSupportFragmentManager(), "editPoolInfoDialogFragment");
         });
 
-        //Navigation
+        // Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {
