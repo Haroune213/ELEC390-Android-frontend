@@ -2,6 +2,7 @@ package com.example.myapplication.View;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -115,10 +116,15 @@ public class SettingsActivity extends AppCompatActivity {
 
                             // Formater le timestamp
                             try {
-                                LocalDateTime dt = LocalDateTime.parse(alert.getTimestamp(),
-                                        DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-                                timeTv.setText(dt.format(
-                                        DateTimeFormatter.ofPattern("MMM d, yyyy  HH:mm")));
+                                LocalDateTime dt = null;
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    dt = LocalDateTime.parse(alert.getTimestamp(),
+                                            DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                                }
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    timeTv.setText(dt.format(
+                                            DateTimeFormatter.ofPattern("MMM d, yyyy  HH:mm")));
+                                }
                             } catch (Exception e) {
                                 timeTv.setText(alert.getTimestamp());
                             }
