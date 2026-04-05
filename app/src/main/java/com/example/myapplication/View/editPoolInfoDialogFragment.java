@@ -57,7 +57,7 @@ public class editPoolInfoDialogFragment extends DialogFragment {
 
             getDialog().getWindow().setLayout(widthInPx, heightInPx);
 
-            // Makes the background transparent so your XML background shows correctly
+            // Makes the background transparent so XML background shows correctly
             getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }

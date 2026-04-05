@@ -1,71 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".View.deleteProfileDialogFragment">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="320dp"
+    android:layout_height="220dp"
+    android:layout_gravity="center"
+    android:background="@drawable/dialog_rounded_bg"
+    android:padding="5dp">
 
-    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/warning_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:text="⚠️"
+        android:textSize="28sp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <TextView
+        android:id="@+id/confirmation_tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/warning_icon"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:text="Are you sure you want to delete your account?"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/textView10"
-            android:layout_width="353dp"
-            android:layout_height="23dp"
-            android:text="@string/this_action_cannot_be_undone_and_your_data_will_be_lost"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirmation_tv"
-            app:layout_constraintVertical_bias="0.021" />
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/confirmation_tv"
+        android:layout_marginTop="8dp"
+        android:layout_marginHorizontal="20dp"
+        android:gravity="center"
+        android:text="This action cannot be undone and your data will be lost."
+        android:textSize="12sp"
+        android:textColor="#888888" />
 
-        <TextView
-            android:id="@+id/confirmation_tv"
-            android:layout_width="285dp"
-            android:layout_height="54dp"
-            android:gravity="center_horizontal"
-            android:text="@string/are_you_sure_you_want_to_delete_your_account"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.081" />
+    <Button
+        android:id="@+id/cancel_btn"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="20dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#CACACA"
+        android:text="Cancel"
+        android:textColor="#303A38"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/delete_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#E46B4F"
-            android:text="@string/delete"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.804"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            app:layout_constraintVertical_bias="0.052"
-            android:textColor="#303A38"
-            android:textStyle="bold"/>
+    <Button
+        android:id="@+id/delete_btn"
+        android:layout_width="117dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="15dp"
+        android:backgroundTint="#E46B4F"
+        android:text="Delete"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
 
-        <Button
-            android:id="@+id/cancel_btn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:backgroundTint="#76CCD7"
-            android:text="@string/cancel_"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.197"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView10"
-            app:layout_constraintVertical_bias="0.052"
-            android:textColor="#303A38"
-            android:textStyle="bold"/>
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</RelativeLayout>

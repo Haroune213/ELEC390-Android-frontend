@@ -1,5 +1,6 @@
 package com.example.myapplication.View;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,13 +15,22 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.myapplication.API.ApiClient;
+import com.example.myapplication.API.ApiService;
+import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ProfileActivity extends AppCompatActivity {
 
     protected Button logout_button, deleteAccount_button, edit_button, edit_profile_details_button;;
 
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,10 +42,17 @@ public class ProfileActivity extends AppCompatActivity {
             return insets;
         });
 
-        // Inside onCreate
+        // User Info
         TextView usernameVal = findViewById(R.id.username_value);
         TextView emailVal = findViewById(R.id.email_value);
 
+        // User Preferences
+        TextView tempValue  = findViewById(R.id.textView22);
+        TextView depthValue = findViewById(R.id.textView23);
+        TextView tdsValue   = findViewById(R.id.textView26);
+        TextView phValue    = findViewById(R.id.textView28);
+
+        // Save email+username
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
         String username = prefs.getString("username", "N/A");
         String email = prefs.getString("email", "N/A"); // Ensure you save email during login/register too
@@ -43,69 +60,58 @@ public class ProfileActivity extends AppCompatActivity {
         usernameVal.setText(username);
         emailVal.setText(email);
 
+        // Charge preferences from API when app starts
+        String userId = prefs.getString("userId", "");
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
+            @Override
+            public void onResponse(Call<UserPreferences> call,
+                                   Response<UserPreferences> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    UserPreferences p = response.body();
+                    tempValue.setText(p.getTempMin() + " - " + p.getTempMax());
+                    depthValue.setText(p.getDepthMin() + " - " + p.getDepthMax());
+                    tdsValue.setText(p.getTdsMin() + " - " + p.getTdsMax());
+                    phValue.setText(p.getPhMin() + " - " + p.getPhMax());
+                }
+            }
+            @Override
+            public void onFailure(Call<UserPreferences> call, Throwable t) {
+                // Garder "Loading..." si pas de connexion
+            }
+        });
+
         // Initialize the button for User Info (the one next to email/username)
         edit_profile_details_button = findViewById(R.id.edit_button2);
 
         // Logic for the popup
-        edit_profile_details_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // 1. Create the dialog using your XML layout
-                final Dialog dialog = new Dialog(ProfileActivity.this);
-                dialog.setContentView(R.layout.dialog_edit_profile_info);
-                if (dialog.getWindow() != null) {
-                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                }
-                dialog.show();
+        edit_profile_details_button.setOnClickListener(v -> {
+            editProfileInfoDialogFragment dialog = new editProfileInfoDialogFragment();
 
-                // 2. Set up the Cancel button inside the popup
-                Button cancel_button = dialog.findViewById(R.id.cancel_button);
-                cancel_button.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss(); // This closes the popup
-                    }
-                });
+            // Once dialog saves, updates TextViews directly
+            dialog.setOnProfileUpdatedListener((newUsername, newEmail) -> {
+                usernameVal.setText(newUsername);
+                emailVal.setText(newEmail);
+            });
 
-                // Note: The Save button is there but won't do anything for now
-                // since we aren't touching the backend or storage yet.
-            }
+            dialog.show(getSupportFragmentManager(), "editProfileInfo");
         });
 
         // 1. Initialize the button from activity_profile.xml
         Button editPrefsButton = findViewById(R.id.edit_button3);
+        editPrefsButton.setOnClickListener(v -> {
+            editPreferencesDialogFragment dialog = new editPreferencesDialogFragment();
 
-        editPrefsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 2. Create the Dialog
-                Dialog dialog = new Dialog(ProfileActivity.this);
-                dialog.setContentView(R.layout.dialog_edit_preferences);
+            dialog.setOnPreferencesUpdatedListener((tempMin, tempMax, phMin, phMax,
+                                                    tdsMin, tdsMax, depthMin, depthMax) -> {
+                tempValue.setText(tempMin + " - " + tempMax);
+                depthValue.setText(depthMin + " - " + depthMax);
+                tdsValue.setText(tdsMin + " - " + tdsMax);
+                phValue.setText(phMin + " - " + phMax);
+            });
 
-                // 3. Set Fixed Dimensions (375dp x 500dp)
-                int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
-                int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
-
-                if (dialog.getWindow() != null) {
-                    dialog.getWindow().setLayout(widthInPx, heightInPx);
-                    // Optional: Make the background transparent if your XML has rounded corners
-                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-                }
-
-                // 4. Activate the Cancel Button inside the dialog
-                Button cancelButton = dialog.findViewById(R.id.cancelPoolInfo_btn);
-                cancelButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss(); // Closes the dialog
-                    }
-                });
-
-                dialog.show();
-            }
+            dialog.show(getSupportFragmentManager(), "editPreferences");
         });
-
-
 
         logout_button = findViewById(R.id.logout_button);
         deleteAccount_button = findViewById(R.id.deleteAccount_button);
