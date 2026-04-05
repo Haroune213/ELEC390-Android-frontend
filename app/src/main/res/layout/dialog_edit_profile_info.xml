@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="65dp"
+        android:autofillHints=""
         android:inputType="text"
         android:digits="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
         android:hint="@string/usernamee" />
@@ -35,6 +36,7 @@
         android:layout_below="@+id/username_txt"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="25dp"
+        android:autofillHints=""
         android:inputType="textEmailAddress"
         android:hint="@string/emaill"/>
 
