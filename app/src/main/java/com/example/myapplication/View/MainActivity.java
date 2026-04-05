@@ -1,10 +1,14 @@
 package com.example.myapplication.View;
 
 import android.app.Dialog;
+import android.widget.Button;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.Toast;
 import android.os.Handler;
 import android.os.Looper;
@@ -148,6 +152,74 @@ public class MainActivity extends AppCompatActivity {
         MaintenanceTaskManager.setupTask(this,
                 findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
 
+
+        ImageView addButton = findViewById(R.id.add);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dialog dialog = new Dialog(MainActivity.this);
+                dialog.setContentView(R.layout.dialog_new_task);
+
+                if (dialog.getWindow() != null) {
+                    int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
+                    int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
+                    dialog.getWindow().setLayout(widthInPx, heightInPx);
+                    dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                }
+
+                // --- NEW UPDATED NAMES MATCHING YOUR XML ---
+                Button cancelBtn = dialog.findViewById(R.id.cancelTask_btn);
+                Button addTaskBtn = dialog.findViewById(R.id.addTask_btn);
+                EditText taskInput = dialog.findViewById(R.id.taskName_txt);
+                EditText freqInput = dialog.findViewById(R.id.editTextText);
+
+                RadioButton daysBtn = dialog.findViewById(R.id.days_radiobtn);
+                RadioButton weeksBtn = dialog.findViewById(R.id.weeks_radiobtn);
+                RadioButton monthsBtn = dialog.findViewById(R.id.months_radiobtn);
+
+                cancelBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                addTaskBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String description = taskInput.getText().toString();
+                        String freqStr = freqInput.getText().toString();
+
+                        if (!description.isEmpty() && !freqStr.isEmpty()) {
+                            int inputVal = Integer.parseInt(freqStr);
+                            int finalDays = 0;
+
+                            // Logic to handle Day(s), Week(s), or Month(s)
+                            if (daysBtn.isChecked()) {
+                                finalDays = inputVal;
+                            } else if (weeksBtn.isChecked()) {
+                                finalDays = inputVal * 7;
+                            } else if (monthsBtn.isChecked()) {
+                                finalDays = inputVal * 30;
+                            }
+
+                            LinearLayout container = findViewById(R.id.maintenance_container);
+                            MaintenanceTaskManager.createDynamicTask(MainActivity.this, container, description, finalDays);
+
+                            MaintenanceTaskManager.saveTask(MainActivity.this, description, finalDays);
+                            dialog.dismiss();
+                        } else {
+                            Toast.makeText(MainActivity.this, "Please enter all details", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+
+                dialog.show();
+            }
+        });
+
+        loadSavedTasks();
     }
 
     private String getLoggedInUserId() {
@@ -252,5 +324,28 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(MainActivity.this, "Depth: " + errorMessage, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void loadSavedTasks() {
+        SharedPreferences prefs = getSharedPreferences("DynamicTasks", MODE_PRIVATE);
+        String taskList = prefs.getString("taskList", "");
+
+        if (!taskList.isEmpty()) {
+            LinearLayout container = findViewById(R.id.maintenance_container);
+            // Clear dynamic views before reloading to prevent duplicates
+            // (Optional: only if you call this multiple times)
+
+            String[] tasks = taskList.split(";");
+            for (String taskData : tasks) {
+                // Trim and check if the string is valid to prevent crashes on empty segments
+                if (taskData.trim().contains("|")) {
+                    String[] parts = taskData.split("\\|");
+                    if (parts.length == 2) {
+                        String desc = parts[0];
+                        int days = Integer.parseInt(parts[1]);
+                        MaintenanceTaskManager.createDynamicTask(this, container, desc, days);
+                    }
+                }
+            }
+        }
     }
 }
