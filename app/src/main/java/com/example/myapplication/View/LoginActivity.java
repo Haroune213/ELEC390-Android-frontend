@@ -3,6 +3,7 @@ package com.example.myapplication.View;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -58,6 +59,7 @@ public class LoginActivity extends AppCompatActivity {
                         String fcmToken = "";
                         if (task.isSuccessful() && task.getResult() != null) {
                             fcmToken = task.getResult(); // On récupère l'adresse du téléphone
+                            Log.d("FCM_TOKEN", "Token: " + fcmToken);
                         }
 
                         // 2. Envoyer le login avec le jeton récupéré

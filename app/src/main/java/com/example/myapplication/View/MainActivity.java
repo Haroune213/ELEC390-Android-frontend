@@ -253,7 +253,7 @@ public class MainActivity extends AppCompatActivity {
         ph_gauge    = findViewById(R.id.ph_gauge);
         tds_gauge   = findViewById(R.id.tds_gauge);
 
-        // Titles
+        // Gauge Titles
         temp_gauge.setTitle("Temperature");
         depth_gauge.setTitle("Depth");
         ph_gauge.setTitle("pH");
@@ -287,13 +287,13 @@ public class MainActivity extends AppCompatActivity {
         temp_gauge.setMinValue(0f);   temp_gauge.setMaxValue(50f);
         temp_gauge.setRanges(15f, 22f, 28f, 35f);
 
-        depth_gauge.setMinValue(0f);  depth_gauge.setMaxValue(5f);
+        depth_gauge.setMinValue(0f);  depth_gauge.setMaxValue(500f);
         depth_gauge.setRanges(0.5f, 1f, 2f, 4f);
 
         ph_gauge.setMinValue(0f);     ph_gauge.setMaxValue(14f);
         ph_gauge.setRanges(6.8f, 7.2f, 7.6f, 8.0f);
 
-        tds_gauge.setMinValue(0f);    tds_gauge.setMaxValue(3000f);
+        tds_gauge.setMinValue(0f);    tds_gauge.setMaxValue(6000f);
         tds_gauge.setRanges(0f, 500f, 1500f, 2500f);
     }
 
@@ -321,22 +321,22 @@ public class MainActivity extends AppCompatActivity {
         }
         if (p.getTdsMin() != null && p.getTdsMax() != null) {
             tds_gauge.setMinValue(0f);
-            tds_gauge.setMaxValue(3000f);
+            tds_gauge.setMaxValue(6000f);
             tds_gauge.setRanges(
-                    p.getTdsMin().floatValue() - 100f,
+                    p.getTdsMin().floatValue() - 300f,
                     p.getTdsMin().floatValue(),
                     p.getTdsMax().floatValue(),
-                    p.getTdsMax().floatValue() + 100f
+                    p.getTdsMax().floatValue() + 300f
             );
         }
         if (p.getDepthMin() != null && p.getDepthMax() != null) {
             depth_gauge.setMinValue(0f);
-            depth_gauge.setMaxValue(5f);
+            depth_gauge.setMaxValue(500f);
             depth_gauge.setRanges(
-                    p.getDepthMin().floatValue() - 0.2f,
+                    p.getDepthMin().floatValue() - 10f,
                     p.getDepthMin().floatValue(),
                     p.getDepthMax().floatValue(),
-                    p.getDepthMax().floatValue() + 0.2f
+                    p.getDepthMax().floatValue() + 10f
             );
         }
     }

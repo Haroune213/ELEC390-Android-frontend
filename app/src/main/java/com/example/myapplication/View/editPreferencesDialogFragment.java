@@ -43,14 +43,14 @@ public class editPreferencesDialogFragment extends DialogFragment {
     // Security Limits (The user cannot input a value beyond these ranges due to security concerns)
     private static final double PH_MIN_SAFE    = 6.8,  PH_MAX_SAFE    = 8.2;
     private static final double TEMP_MIN_SAFE  = 10.0, TEMP_MAX_SAFE  = 40.0;
-    private static final double TDS_MIN_SAFE   = 0.0,  TDS_MAX_SAFE   = 3000.0;
-    private static final double DEPTH_MIN_SAFE = 0.0,  DEPTH_MAX_SAFE = 5.0;
+    private static final double TDS_MIN_SAFE   = 0.0,  TDS_MAX_SAFE   = 6000.0;
+    private static final double DEPTH_MIN_SAFE = 0.0,  DEPTH_MAX_SAFE = 500;
 
     // Default Values
     private static final double PH_MIN_DEFAULT    = 7.2,  PH_MAX_DEFAULT    = 7.8;
     private static final double TEMP_MIN_DEFAULT  = 24.0, TEMP_MAX_DEFAULT  = 28.0;
     private static final double TDS_MIN_DEFAULT   = 500.0,TDS_MAX_DEFAULT   = 1500.0;
-    private static final double DEPTH_MIN_DEFAULT = 1.0,  DEPTH_MAX_DEFAULT = 2.0;
+    private static final double DEPTH_MIN_DEFAULT = 100,  DEPTH_MAX_DEFAULT = 200;
 
     public editPreferencesDialogFragment() {}
 
