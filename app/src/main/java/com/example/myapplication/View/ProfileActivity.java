@@ -55,15 +55,9 @@ public class ProfileActivity extends AppCompatActivity {
         TextView tdsValue   = findViewById(R.id.textView26);
         TextView phValue    = findViewById(R.id.textView28);
 
-        // Pool Info
-        TextView typeValue      = findViewById(R.id.type_value);
-        TextView dimensionValue = findViewById(R.id.dimension_value);
-        TextView unitsValue     = findViewById(R.id.units_value);
-
         // Buttons
         logout_button = findViewById(R.id.logout_button);
         deleteAccount_button = findViewById(R.id.deleteAccount_button);
-        edit_button = findViewById(R.id.edit_button);
         edit_profile_details_button = findViewById(R.id.edit_button2);
         editPrefsButton = findViewById(R.id.edit_button3);
 
@@ -96,21 +90,7 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Charge pool info from API when app starts
-        api.getPoolInfo(userId).enqueue(new Callback<PoolInfo>() {
-            @Override
-            public void onResponse(Call<PoolInfo> call, Response<PoolInfo> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    PoolInfo p = response.body();
-                    typeValue.setText(p.getPoolType());
-                    dimensionValue.setText(p.getWidth() + " x " + p.getLength()
-                            + " x " + p.getDepth());
-                    unitsValue.setText(p.getUnit());
-                }
-            }
-            @Override
-            public void onFailure(Call<PoolInfo> call, Throwable t) {}
-        });
+
 
         // Button initialization: User Info
         edit_profile_details_button.setOnClickListener(v -> {
@@ -169,16 +149,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        // Button initialization: Go to Dialog edit pool information, callback after save info
-        edit_button.setOnClickListener(v -> {
-            editPoolInfoDialogFragment dialog = new editPoolInfoDialogFragment();
-            dialog.setOnPoolInfoUpdatedListener((type, width, depth, length, unit) -> {
-                typeValue.setText(type);
-                dimensionValue.setText(width + " x " + length + " x " + depth);
-                unitsValue.setText(unit);
-            });
-            dialog.show(getSupportFragmentManager(), "editPoolInfoDialogFragment");
-        });
 
         // Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
