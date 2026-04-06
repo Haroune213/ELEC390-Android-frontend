@@ -55,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         refreshHandler.removeCallbacks(refreshRunnable);
+        overridePendingTransition(0, 0);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
@@ -132,14 +133,17 @@ public class MainActivity extends AppCompatActivity {
         });
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setItemActiveIndicatorEnabled(false);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();
             if (id == R.id.nav_home) return true;
             else if (id == R.id.nav_profile) {
                 startActivity(new Intent(MainActivity.this, ProfileActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_settings) {
                 startActivity(new Intent(MainActivity.this, SettingsActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             return false;
