@@ -62,6 +62,26 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         refreshHandler.post(refreshRunnable);
+
+        SharedPreferences checkboxesprefs = getSharedPreferences("GaugePrefs", MODE_PRIVATE);
+
+        boolean showTemp = checkboxesprefs.getBoolean("showTemp", true);
+        boolean showDepth = checkboxesprefs.getBoolean("showDepth", true);
+        boolean showTds = checkboxesprefs.getBoolean("showTds", true);
+        boolean showPh = checkboxesprefs.getBoolean("showPh", true);
+
+        if (temp_gauge != null)
+            temp_gauge.setVisibility(showTemp ? View.VISIBLE : View.GONE);
+
+        if (depth_gauge != null)
+            depth_gauge.setVisibility(showDepth ? View.VISIBLE : View.GONE);
+
+        if (tds_gauge != null)
+            tds_gauge.setVisibility(showTds ? View.VISIBLE : View.GONE);
+
+        if (ph_gauge != null)
+            ph_gauge.setVisibility(showPh ? View.VISIBLE : View.GONE);
+        // ---------------------------
     }
 
     @Override
