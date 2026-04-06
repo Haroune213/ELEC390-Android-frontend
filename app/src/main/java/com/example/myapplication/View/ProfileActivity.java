@@ -39,7 +39,7 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, 0);
             return insets;
         });
 
@@ -180,6 +180,7 @@ public class ProfileActivity extends AppCompatActivity {
 
         // Navigation
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_nav);
+        bottomNavigationView.setItemActiveIndicatorEnabled(false);
         bottomNavigationView.setSelectedItemId(R.id.nav_profile);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             int id = item.getItemId();  // get the ID of the selected item
@@ -188,12 +189,19 @@ public class ProfileActivity extends AppCompatActivity {
                 return true;
             } else if (id == R.id.nav_home) {
                 startActivity(new Intent(ProfileActivity.this, MainActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             } else if (id == R.id.nav_settings) {
                 startActivity(new Intent(ProfileActivity.this, SettingsActivity.class));
+                overridePendingTransition(0, 0);
                 return true;
             }
             return false;
         });
+    }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        overridePendingTransition(0, 0);
     }
 }
