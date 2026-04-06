@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -199,6 +200,34 @@ public class ProfileActivity extends AppCompatActivity {
             }
             return false;
         });
+
+        // monitored data checkboxes behavior
+        // Inside onCreate of ProfileActivity.java
+        CheckBox cbTemp = findViewById(R.id.pH_checkBox4);
+        CheckBox cbDepth = findViewById(R.id.pH_checkBox5);
+        CheckBox cbTds = findViewById(R.id.pH_checkBox6);
+        CheckBox cbPh = findViewById(R.id.pH_checkBox3);
+
+        SharedPreferences checkboxesprefs = getSharedPreferences("GaugePrefs", MODE_PRIVATE);
+
+// Set initial state from saved prefs (default to true)
+        cbTemp.setChecked(checkboxesprefs.getBoolean("showTemp", true));
+        cbDepth.setChecked(checkboxesprefs.getBoolean("showDepth", true));
+        cbTds.setChecked(checkboxesprefs.getBoolean("showTds", true));
+        cbPh.setChecked(checkboxesprefs.getBoolean("showPh", true));
+
+// Save state when changed
+        cbTemp.setOnCheckedChangeListener((v, isChecked) ->
+                checkboxesprefs.edit().putBoolean("showTemp", isChecked).apply());
+
+        cbDepth.setOnCheckedChangeListener((v, isChecked) ->
+                checkboxesprefs.edit().putBoolean("showDepth", isChecked).apply());
+
+        cbTds.setOnCheckedChangeListener((v, isChecked) ->
+                checkboxesprefs.edit().putBoolean("showTds", isChecked).apply());
+
+        cbPh.setOnCheckedChangeListener((v, isChecked) ->
+                checkboxesprefs.edit().putBoolean("showPh", isChecked).apply());
     }
     @Override
     protected void onPause() {
