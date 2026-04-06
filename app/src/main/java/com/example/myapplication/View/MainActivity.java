@@ -231,7 +231,7 @@ public class MainActivity extends AppCompatActivity {
 
     private String getLoggedInUserId() {
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        return prefs.getString("userId", "user123");
+        return prefs.getString("userId", "");
     }
 
     private final Runnable refreshRunnable = new Runnable() {
@@ -254,13 +254,12 @@ public class MainActivity extends AppCompatActivity {
         tds_gauge   = findViewById(R.id.tds_gauge);
 
         // Gauge Titles
-        temp_gauge.setTitle("Temperature");
-        depth_gauge.setTitle("Depth");
+        temp_gauge.setTitle("Temperature (C)");
+        depth_gauge.setTitle("Depth (Cm)");
         ph_gauge.setTitle("pH");
-        tds_gauge.setTitle("TDS");
+        tds_gauge.setTitle("TDS (PPM)");
 
         // Ranges by default
-        applyDefaultRanges();
 
         // Fetch preferences to update ranges
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -283,19 +282,6 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void applyDefaultRanges() {
-        temp_gauge.setMinValue(0f);   temp_gauge.setMaxValue(50f);
-        temp_gauge.setRanges(15f, 22f, 28f, 35f);
-
-        depth_gauge.setMinValue(0f);  depth_gauge.setMaxValue(500f);
-        depth_gauge.setRanges(0.5f, 1f, 2f, 4f);
-
-        ph_gauge.setMinValue(0f);     ph_gauge.setMaxValue(14f);
-        ph_gauge.setRanges(6.8f, 7.2f, 7.6f, 8.0f);
-
-        tds_gauge.setMinValue(0f);    tds_gauge.setMaxValue(6000f);
-        tds_gauge.setRanges(0f, 500f, 1500f, 2500f);
-    }
 
     private void applyPreferencesToGauges(UserPreferences p) {
         if (p.getTempMin() != null && p.getTempMax() != null) {
@@ -342,7 +328,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchTemperature(String userId) {
-        temperatureController.fetchTemperatureForUser(userId, new TemperatureController.TemperatureCallback() {
+        temperatureController.fetchTemperatureForUser("1", new TemperatureController.TemperatureCallback() {
             @Override
             public void onSuccess(TemperatureData temperatureData) {
                 double temp = temperatureData.getTemperature();
@@ -357,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchPh(String userId) {
-        phController.fetchPhForUser(userId, new PHController.PHCallback() {
+        phController.fetchPhForUser("1", new PHController.PHCallback() {
             @Override
             public void onSuccess(PHData phData) {
                 double ph = phData.getPh();
@@ -372,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchTds(String userId) {
-        tdsController.fetchTdsForUser(userId, new TdsController.TdsCallback() {
+        tdsController.fetchTdsForUser("1", new TdsController.TdsCallback() {
             @Override
             public void onSuccess(TdsData tdsData) {
                 double tds = tdsData.getTds();
@@ -387,7 +373,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchDepth(String userId) {
-        depthController.fetchDepthForUser(userId, new DepthController.DepthCallback() {
+        depthController.fetchDepthForUser("1", new DepthController.DepthCallback() {
             @Override
             public void onSuccess(DepthData depthData) {
                 double depth = depthData.getDepth();

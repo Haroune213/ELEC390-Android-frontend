@@ -190,7 +190,11 @@ public class GaugeView extends View {
         float sweepAngle = ((value - minValue) / range) * 180f;
         canvas.drawArc(rect, 180f, sweepAngle, false, progressPaint);
 
-        canvas.drawText(String.valueOf((int) value), w / 2f, h * 0.68f, valuePaint);
+        if(title == "TDS (PPM)"){
+            canvas.drawText(String.valueOf((int) value), w / 2f, h * 0.68f, valuePaint);
+        }else{
+            canvas.drawText(String.format("%.2f", value), w / 2f, h * 0.68f, valuePaint);
+        }
         canvas.drawText(title, w / 2f, h * 0.82f, titlePaint);
 
         canvas.drawText(String.valueOf((int) minValue), left, h * 0.95f, labelPaint);

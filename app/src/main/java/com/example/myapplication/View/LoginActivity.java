@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
                             public void onSuccess(Map<String, String> data) {
                                 // Ta logique de succès existante (SharedPreferences, etc.)
                                 String token = data.get("token");
-                                String userId = data.containsKey("userId") ? data.get("userId") : username;
+                                String userId = data.get("userId");
                                 String email = data.get("email");
 
                                 SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
@@ -93,3 +93,4 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 }
+

@@ -17,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
+import com.example.myapplication.Model.LoginRequest;
 import com.example.myapplication.Model.PoolInfo;
 import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
@@ -74,7 +75,7 @@ public class ProfileActivity extends AppCompatActivity {
         emailVal.setText(email);
 
         // Charge preferences from API when app starts
-        String userId = prefs.getString("userId", "");
+        String userId = prefs.getString("userId",  "");
         ApiService api = ApiClient.getClient().create(ApiService.class);
         api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
             @Override
