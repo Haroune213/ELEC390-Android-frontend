@@ -411,22 +411,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
             <CheckBox
-                android:id="@+id/pH_checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginStart="15dp"
-                android:text="@string/chlorine"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox3" />
-
-            <CheckBox
                 android:id="@+id/pH_checkBox4"
                 android:layout_width="wrap_content"
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/water_temperature"
                 app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox2" />
+                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox3" />
 
             <CheckBox
                 android:id="@+id/pH_checkBox5"

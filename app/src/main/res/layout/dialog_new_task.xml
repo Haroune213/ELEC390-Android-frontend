@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="350dp"
-    android:layout_height="365dp"
+    android:layout_height="370dp"
     android:layout_gravity="center"
     android:background="@drawable/dialog_rounded_bg"
     android:padding="5dp">
@@ -52,6 +52,18 @@
         android:textSize="18sp"
         android:textStyle="bold"  />
 
+    <TextView
+        android:id="@+id/every"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="67dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="7dp"
+        android:layout_below="@+id/frequency"
+        android:text="Every"
+        android:textSize="18sp" />
+
     <EditText
         android:id="@+id/editTextText"
         android:layout_width="80dp"
@@ -59,7 +71,7 @@
         android:layout_below="@id/taskName_txt"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="140dp"
-        android:layout_marginTop="19dp"
+        android:layout_marginTop="50dp"
         android:autofillHints=""
         android:inputType="number"
         android:textSize="16sp" />
@@ -71,7 +83,7 @@
         android:layout_below="@+id/taskName_txt"
         android:layout_alignParentEnd="true"
         android:layout_marginEnd="20dp"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="22dp">
 
         <RadioButton
             android:id="@+id/days_radiobtn"
