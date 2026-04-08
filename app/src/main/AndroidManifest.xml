@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
+
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -32,6 +33,7 @@
         </activity>
         <activity android:name=".View.ProfileActivity" />
         <activity android:name=".View.SettingsActivity" />
+        <receiver android:name=".Model.MaintenanceReceiver" android:exported="false" />
 
         <service
             android:name=".Service.MyFirebaseMessagingService"
