@@ -60,6 +60,23 @@ public class AuthentificationController {
             }
         });
     }
+    public void logout(String userId, AuthCallback callback) {
+        apiService.logout(userId).enqueue(new Callback<Map<String, String>>() {
+            @Override
+            public void onResponse(Call<Map<String, String>> call, Response<Map<String, String>> response) {
+                if (response.isSuccessful()) {
+                    callback.onSuccess(response.body());
+                } else {
+                    callback.onError("Logout failed: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Map<String, String>> call, Throwable t) {
+                callback.onError("Error: " + t.getMessage());
+            }
+        });
+    }
 
     public interface AuthCallback {
         void onSuccess(Map<String, String> data);

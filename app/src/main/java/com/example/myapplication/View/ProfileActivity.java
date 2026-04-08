@@ -18,11 +18,14 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
+import com.example.myapplication.Controller.AuthentificationController;
 import com.example.myapplication.Model.LoginRequest;
 import com.example.myapplication.Model.PoolInfo;
 import com.example.myapplication.Model.UserPreferences;
 import com.example.myapplication.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.util.Map;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -130,6 +133,21 @@ public class ProfileActivity extends AppCompatActivity {
                 editor.putBoolean("isLoggedIn", false);
                 editor.apply();
 
+                // 1. Call the backend to clear the FCM token
+                AuthentificationController authController = new AuthentificationController();
+                authController.logout(userId, new AuthentificationController.AuthCallback() {
+                    @Override
+                    public void onSuccess(Map<String, String> data) {
+                        performLocalLogout(prefs);
+                    }
+
+                    @Override
+                    public void onError(String errorMessage) {
+                        // Logout locally even if the network call fails to not trap the user
+                        performLocalLogout(prefs);
+                    }
+                });
+
                 Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
@@ -137,6 +155,7 @@ public class ProfileActivity extends AppCompatActivity {
 
             }
         });
+
 
         // Button initialization: Go to Dialog delete account
         deleteAccount_button.setOnClickListener(new View.OnClickListener() {
@@ -203,5 +222,15 @@ public class ProfileActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         overridePendingTransition(0, 0);
+    }
+    private void performLocalLogout(SharedPreferences prefs) {
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putBoolean("isLoggedIn", false);
+        editor.apply();
+
+        Intent intent = new Intent(ProfileActivity.this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        finish();
     }
 }

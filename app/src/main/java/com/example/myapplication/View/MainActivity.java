@@ -87,16 +87,44 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+        // Use the same preference name used in LoginActivity ("MyAppPrefs")
         SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        boolean isLoggedIn = prefs.getBoolean("isLoggedIn", false);
 
-        if (!isLoggedIn) {
+        if (prefs.getBoolean("isLoggedIn", false)) {
+            // This retrieves the numeric ID (e.g., "20") saved during login
+            currentUserId = prefs.getString("userId", "");
+
+            // Safety check: if currentUserId is empty, we shouldn't be here
+            if (currentUserId.isEmpty()) {
+                startActivity(new Intent(this, LoginActivity.class));
+                finish();
+            }
+        } else {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
-        } else {
-            currentUserId = prefs.getString("userId", "user123");
         }
     }
+
+    // 2. Simplify getLoggedInUserId to ensure it returns the numeric string
+    private String getLoggedInUserId() {
+        // Return the class variable we verified in onStart
+        return currentUserId != null ? currentUserId : "";
+    }
+
+    // 3. The refreshRunnable is already correct as it calls the updated getLoggedInUserId()
+    private final Runnable refreshRunnable = new Runnable() {
+        @Override
+        public void run() {
+            // ALWAYS use "1" to pull data from the shared physical sensor
+            String forceId = "1";
+            fetchTemperature(forceId);
+            fetchPh(forceId);
+            fetchTds(forceId);
+            fetchDepth(forceId);
+
+            refreshHandler.postDelayed(this,  1000);
+        }
+    };
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -253,24 +281,6 @@ public class MainActivity extends AppCompatActivity {
         loadSavedTasks();
     }
 
-    private String getLoggedInUserId() {
-        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
-        return prefs.getString("userId", "");
-    }
-
-    private final Runnable refreshRunnable = new Runnable() {
-        @Override
-        public void run() {
-            String currentUserId = getLoggedInUserId();
-            fetchTemperature(currentUserId);
-            fetchPh(currentUserId);
-            fetchTds(currentUserId);
-            fetchDepth(currentUserId);
-
-            refreshHandler.postDelayed(this, 10 * 1000);
-        }
-    };
-
     private void setupUI() {
         temp_gauge  = findViewById(R.id.temp_gauge);
         depth_gauge = findViewById(R.id.depth_gauge);
@@ -290,19 +300,15 @@ public class MainActivity extends AppCompatActivity {
         String userId = prefs.getString("userId", "");
 
         ApiService api = ApiClient.getClient().create(ApiService.class);
-        api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
+        api.getUserPreferences("1").enqueue(new Callback<UserPreferences>() {
             @Override
-            public void onResponse(Call<UserPreferences> call,
-                                   Response<UserPreferences> response) {
+            public void onResponse(Call<UserPreferences> call, Response<UserPreferences> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    UserPreferences p = response.body();
-                    applyPreferencesToGauges(p);
+                    applyPreferencesToGauges(response.body());
                 }
             }
             @Override
-            public void onFailure(Call<UserPreferences> call, Throwable t) {
-                // Keep default ranges if fail
-            }
+            public void onFailure(Call<UserPreferences> call, Throwable t) {}
         });
     }
 
@@ -352,11 +358,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchTemperature(String userId) {
-        temperatureController.fetchTemperatureForUser("1", new TemperatureController.TemperatureCallback() {
+        temperatureController.fetchTemperatureForUser(userId, new TemperatureController.TemperatureCallback() {
             @Override
-            public void onSuccess(TemperatureData temperatureData) {
-                double temp = temperatureData.getTemperature();
-                temp_gauge.setValueAnimated((float) temp);
+            public void onSuccess(TemperatureData data) {
+                temp_gauge.setValueAnimated(data.getTemperature().floatValue());
             }
             @Override public void onEmpty() {}
             @Override
@@ -367,11 +372,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchPh(String userId) {
-        phController.fetchPhForUser("1", new PHController.PHCallback() {
+        phController.fetchPhForUser(userId, new PHController.PHCallback() {
             @Override
-            public void onSuccess(PHData phData) {
-                double ph = phData.getPh();
-                ph_gauge.setValueAnimated((float) ph);
+            public void onSuccess(PHData data) {
+                ph_gauge.setValueAnimated((float)data.getPh());
             }
             @Override public void onEmpty() {}
             @Override
@@ -382,11 +386,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchTds(String userId) {
-        tdsController.fetchTdsForUser("1", new TdsController.TdsCallback() {
+        tdsController.fetchTdsForUser(userId, new TdsController.TdsCallback() {
             @Override
-            public void onSuccess(TdsData tdsData) {
-                double tds = tdsData.getTds();
-                tds_gauge.setValueAnimated((float) tds);
+            public void onSuccess(TdsData data) {
+                tds_gauge.setValueAnimated((float) data.getTds());
             }
             @Override public void onEmpty() {}
             @Override
@@ -397,11 +400,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fetchDepth(String userId) {
-        depthController.fetchDepthForUser("1", new DepthController.DepthCallback() {
+        depthController.fetchDepthForUser(userId, new DepthController.DepthCallback() {
             @Override
-            public void onSuccess(DepthData depthData) {
-                double depth = depthData.getDepth();
-                depth_gauge.setValueAnimated((float) depth);
+            public void onSuccess(DepthData data) {
+                depth_gauge.setValueAnimated((float) data.getDepth());
             }
             @Override public void onEmpty() {}
             @Override
