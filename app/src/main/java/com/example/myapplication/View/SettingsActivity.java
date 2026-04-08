@@ -70,7 +70,7 @@ public class SettingsActivity extends AppCompatActivity {
         reminder_checkBox.setOnCheckedChangeListener((btn, isChecked) ->
                 sharedPreferences.edit().putBoolean("Reminder", isChecked).apply());
 
-        // ── Charger l'historique depuis l'API ─────────────────────────────────
+        // ── Charge the history from the API ─────────────────────────────────
         String userId = getSharedPreferences("MyAppPrefs", MODE_PRIVATE)
                 .getString("userId", "");
 
@@ -82,7 +82,22 @@ public class SettingsActivity extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     List<Alert> alerts = response.body();
 
-                    // Compter les non-résolus pour le badge
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                        alerts.sort((a, b) -> {
+                            try {
+                                LocalDateTime dtA = LocalDateTime.parse(a.getTimestamp(),
+                                        DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                                LocalDateTime dtB = LocalDateTime.parse(b.getTimestamp(),
+                                        DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+                                return dtB.compareTo(dtA); // decreasing order
+                            } catch (Exception e) {
+                                return 0;
+                            }
+                        });
+
+                    }
+
+                    // Count the unresolved for the badge
                     long unresolved = alerts.stream()
                             .filter(a -> a.getResolved() != null && !a.getResolved())
                             .count();
@@ -91,7 +106,7 @@ public class SettingsActivity extends AppCompatActivity {
                         unreadBadge.setVisibility(View.VISIBLE);
                     }
 
-                    // Adapter personnalisé pour afficher chaque notification
+                    // Adapt personalization to display each notification
                     ArrayAdapter<Alert> adapter = new ArrayAdapter<Alert>(
                             SettingsActivity.this,
                             R.layout.item_notification,
@@ -115,7 +130,7 @@ public class SettingsActivity extends AppCompatActivity {
                             titleTv.setText("Pool Alert: " + alert.getSensorType());
                             messageTv.setText(alert.getMessage());
 
-                            // Formater le timestamp
+                            // Format timestamp
                             try {
                                 LocalDateTime dt = null;
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -130,11 +145,11 @@ public class SettingsActivity extends AppCompatActivity {
                                 timeTv.setText(alert.getTimestamp());
                             }
 
-                            // Rouge si non-résolu, vert si résolu
+                            // Red if unresolved,green if resolved
                             boolean resolved = alert.getResolved() != null && alert.getResolved();
                             colorStrip.setBackgroundColor(resolved
-                                    ? 0xFF76CCD7   // vert-bleu = résolu
-                                    : 0xFFE46B4F); // orange-rouge = actif
+                                    ? 0xFF76CCD7   // vert-bleu = resolved
+                                    : 0xFFE46B4F); // orange-rouge = active
 
                             return convertView;
                         }
@@ -151,7 +166,7 @@ public class SettingsActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Alert>> call, Throwable t) {
-                // Garder la liste vide si pas de connexion
+                // Keep list empty if no connection
             }
         });
 
