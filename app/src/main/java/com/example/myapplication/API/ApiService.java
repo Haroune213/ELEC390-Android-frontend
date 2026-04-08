@@ -11,6 +11,8 @@ import com.example.myapplication.Model.PHData;
 import com.example.myapplication.Model.UpdatePreferencesRequest;
 import com.example.myapplication.Model.UpdateProfileRequest;
 import com.example.myapplication.Model.UserPreferences;
+import com.example.myapplication.Model.TasksData;
+import com.example.myapplication.Model.TasksRequest;
 
 import java.util.List;
 import java.util.Map;
@@ -76,4 +78,15 @@ public interface ApiService {
     // Add this to your existing ApiService interface
     @POST("/auth/logout/{userId}")
     Call<Map<String, String>> logout(@Path("userId") String userId);
+@POST("/api/tasks")
+Call<TasksData> postTask(@Body TasksRequest request);
+
+@GET("/api/tasks/{userId}")
+Call<List<TasksData>> getTasksForUser(@Path("userId") String userId);
+
+@DELETE("/api/tasks/{userId}/{taskId}")
+Call<String> deleteTask(
+        @Path("userId") String userId,
+        @Path("taskId") Long taskId
+);
 }

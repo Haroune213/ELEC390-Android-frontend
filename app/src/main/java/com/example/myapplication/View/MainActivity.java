@@ -18,7 +18,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import android.widget.ImageView;
-
+import com.example.myapplication.Model.TasksData;
 import com.example.myapplication.API.ApiClient;
 import com.example.myapplication.API.ApiService;
 import com.example.myapplication.Controller.DepthController;
@@ -28,6 +28,7 @@ import com.example.myapplication.Controller.TemperatureController;
 import com.example.myapplication.Model.DepthData;
 import com.example.myapplication.Model.NotificationHelper;
 import com.example.myapplication.Model.PHData;
+import com.example.myapplication.Model.TasksRequest;
 import com.example.myapplication.Model.TdsData;
 import com.example.myapplication.Model.TemperatureData;
 import com.example.myapplication.Model.UserPreferences;
@@ -35,6 +36,8 @@ import com.example.myapplication.R;
 import com.example.myapplication.UI.GaugeView;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.example.myapplication.Model.MaintenanceTaskManager;
+
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -247,14 +250,14 @@ public class MainActivity extends AppCompatActivity {
                 addTaskBtn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String description = taskInput.getText().toString();
-                        String freqStr = freqInput.getText().toString();
+                        String description = taskInput.getText().toString().trim();
+                        String freqStr = freqInput.getText().toString().trim();
 
                         if (!description.isEmpty() && !freqStr.isEmpty()) {
                             int inputVal = Integer.parseInt(freqStr);
                             int finalDays = 0;
 
-                            // Logic to handle Day(s), Week(s), or Month(s)
+                            // Convert selected unit to days
                             if (daysBtn.isChecked()) {
                                 finalDays = inputVal;
                             } else if (weeksBtn.isChecked()) {
@@ -263,11 +266,49 @@ public class MainActivity extends AppCompatActivity {
                                 finalDays = inputVal * 30;
                             }
 
-                            LinearLayout container = findViewById(R.id.maintenance_container);
-                            MaintenanceTaskManager.createDynamicTask(MainActivity.this, container, description, finalDays);
+                            SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+                            String userId = prefs.getString("userId", "");
 
-                            MaintenanceTaskManager.saveTask(MainActivity.this, description, finalDays);
-                            dialog.dismiss();
+                            if (userId.isEmpty()) {
+                                Toast.makeText(MainActivity.this, "User not found", Toast.LENGTH_SHORT).show();
+                                return;
+                            }
+
+                            TasksRequest request = new TasksRequest(
+                                    userId,
+                                    description,
+                                    finalDays,
+                                    inputVal,
+                                    false
+                            );
+
+                            ApiService api = ApiClient.getClient().create(ApiService.class);
+                            api.postTask(request).enqueue(new Callback<TasksData>() {
+                                @Override
+                                public void onResponse(Call<TasksData> call, Response<TasksData> response) {
+                                    if (response.isSuccessful() && response.body() != null) {
+                                        TasksData savedTask = response.body();
+
+                                        LinearLayout container = findViewById(R.id.maintenance_container);
+                                        MaintenanceTaskManager.createDynamicTask(
+                                                MainActivity.this,
+                                                container,
+                                                savedTask.getTaskDescription(),
+                                                savedTask.getTimeSeparation()
+                                        );
+
+                                        dialog.dismiss();
+                                    } else {
+                                        Toast.makeText(MainActivity.this, "Failed to save task", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<TasksData> call, Throwable t) {
+                                    Toast.makeText(MainActivity.this, "Backend error: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                                }
+                            });
+
                         } else {
                             Toast.makeText(MainActivity.this, "Please enter all details", Toast.LENGTH_SHORT).show();
                         }
@@ -413,26 +454,41 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     private void loadSavedTasks() {
-        SharedPreferences prefs = getSharedPreferences("DynamicTasks", MODE_PRIVATE);
-        String taskList = prefs.getString("taskList", "");
+        SharedPreferences prefs = getSharedPreferences("MyAppPrefs", MODE_PRIVATE);
+        String userId = prefs.getString("userId", "");
 
-        if (!taskList.isEmpty()) {
-            LinearLayout container = findViewById(R.id.maintenance_container);
-            // Clear dynamic views before reloading to prevent duplicates
-            // (Optional: only if you call this multiple times)
+        if (userId.isEmpty()) {
+            return;
+        }
 
-            String[] tasks = taskList.split(";");
-            for (String taskData : tasks) {
-                // Trim and check if the string is valid to prevent crashes on empty segments
-                if (taskData.trim().contains("|")) {
-                    String[] parts = taskData.split("\\|");
-                    if (parts.length == 2) {
-                        String desc = parts[0];
-                        int days = Integer.parseInt(parts[1]);
-                        MaintenanceTaskManager.createDynamicTask(this, container, desc, days);
+        LinearLayout container = findViewById(R.id.maintenance_container);
+        container.removeAllViews();
+
+        ApiService api = ApiClient.getClient().create(ApiService.class);
+        api.getTasksForUser(userId).enqueue(new Callback<List<TasksData>>() {
+            @Override
+            public void onResponse(Call<List<TasksData>> call, Response<List<TasksData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<TasksData> tasks = response.body();
+
+                    for (TasksData task : tasks) {
+                        String desc = task.getTaskDescription();
+                        int days = task.getTimeSeparation();
+
+                        MaintenanceTaskManager.createDynamicTask(
+                                MainActivity.this,
+                                container,
+                                desc,
+                                days
+                        );
                     }
                 }
             }
-        }
+
+            @Override
+            public void onFailure(Call<List<TasksData>> call, Throwable t) {
+                t.printStackTrace();
+            }
+        });
     }
 }
