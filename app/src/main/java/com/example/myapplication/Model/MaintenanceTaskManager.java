@@ -17,44 +17,70 @@ import android.content.SharedPreferences;
 
 public class MaintenanceTaskManager {
 
+    // Replace your entire setupTask method with this:
     @SuppressLint("SetTextI18n")
     public static void setupTask(Context context, CheckBox checkBox, TextView dateText, LinearLayout layout, int daysToAdd, String taskName) {
 
-        dateText.setVisibility(View.GONE);
+        android.content.SharedPreferences prefs = context.getSharedPreferences("TaskStates", Context.MODE_PRIVATE);
+        long savedTargetTime = prefs.getLong(taskName + "_target", 0);
+
+        // Restore visual state if a timer is currently active
+        if (savedTargetTime > System.currentTimeMillis()) {
+            checkBox.setChecked(true);
+            layout.setBackgroundColor(Color.parseColor("#C8E6C9"));
+            java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+            dateText.setText("Upcoming " + taskName + ": " + sdf.format(new java.util.Date(savedTargetTime)));
+            dateText.setVisibility(View.VISIBLE);
+        } else {
+            dateText.setVisibility(View.GONE);
+        }
 
         checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            android.app.AlarmManager alarmManager = (android.app.AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+            android.content.Intent intent = new android.content.Intent(context, MaintenanceReceiver.class);
+            intent.putExtra("taskName", taskName);
+
+            int requestCode = taskName.hashCode();
+            android.app.PendingIntent pendingIntent = android.app.PendingIntent.getBroadcast(
+                    context, requestCode, intent,
+                    android.app.PendingIntent.FLAG_UPDATE_CURRENT | android.app.PendingIntent.FLAG_IMMUTABLE
+            );
+
             if (isChecked) {
-                Toast.makeText(context, "Task Done!", Toast.LENGTH_SHORT).show();
-                layout.setBackgroundColor(Color.parseColor("#C8E6C9")); // Green for everyone when done
+                Toast.makeText(context, "Task Done! Timer started.", Toast.LENGTH_SHORT).show();
+                layout.setBackgroundColor(Color.parseColor("#C8E6C9"));
 
-                Calendar calendar = Calendar.getInstance();
-                calendar.add(Calendar.DAY_OF_YEAR, daysToAdd);
-                SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
-                String futureDate = sdf.format(calendar.getTime());
+                long delayMillis = (long)  1000;
+                long targetTime = System.currentTimeMillis() + delayMillis;
 
-                dateText.setText("Upcoming " + taskName + ": " + futureDate);
-                dateText.setVisibility(daysToAdd <= 0 ? View.GONE : View.VISIBLE);
+                // Save the target time so it survives app restarts
+                prefs.edit().putLong(taskName + "_target", targetTime).apply();
+
+                java.text.SimpleDateFormat sdf = new java.text.SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+                dateText.setText("Upcoming " + taskName + ": " + sdf.format(new java.util.Date(targetTime)));
+                dateText.setVisibility(View.VISIBLE);
+
+                if (daysToAdd > 0 && alarmManager != null) {
+                    alarmManager.set(android.app.AlarmManager.RTC_WAKEUP, targetTime, pendingIntent);
+                }
 
             } else {
-                // Return to original colors when unchecked
-                // We check if it's one of your original predefined tasks
                 String nameLower = taskName.toLowerCase();
                 if (nameLower.contains("filter") || nameLower.contains("skimmer") || nameLower.contains("pump")) {
-                    layout.setBackgroundColor(Color.parseColor("#F0F0F0")); // Original Grey/Green
+                    layout.setBackgroundColor(Color.parseColor("#F0F0F0"));
                 } else {
-                    layout.setBackgroundColor(Color.parseColor("#D1F2FF")); // User-created Light Blue
+                    layout.setBackgroundColor(Color.parseColor("#D1F2FF"));
                 }
                 dateText.setVisibility(View.GONE);
+
+                // Clear the saved state so it does not load next time
+                prefs.edit().remove(taskName + "_target").apply();
+
+                if (alarmManager != null) {
+                    alarmManager.cancel(pendingIntent);
+                }
             }
         });
-
-        // Auto-reset logic
-        if (daysToAdd > 0) {
-            long delayMillis = (long) daysToAdd * 24 * 60 * 60 * 1000;
-            new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                checkBox.setChecked(false);
-            }, delayMillis);
-        }
     }
 
     public static void createDynamicTask(Context context, LinearLayout container, String taskDescription, int frequencyDays) {

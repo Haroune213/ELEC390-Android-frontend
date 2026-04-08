@@ -6,7 +6,7 @@ public class Alert {
     private String sensorType;
     private String message;
     private Double value;
-    private String timestamp; // String car Gson gère LocalDateTime comme String
+    private String timestamp; // String bcs Gson treats LocalDateTime as a String
     private Boolean resolved;
 
     public Long getId()          { return id; }

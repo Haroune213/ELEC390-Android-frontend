@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                     int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
                     dialog.getWindow().setLayout(widthInPx, heightInPx);
 
-                    // Make background transparent so your XML corners show correctly
+                    // Make background transparent so XML corners show correctly
                     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 }
 
@@ -227,7 +227,7 @@ public class MainActivity extends AppCompatActivity {
                     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 }
 
-                // --- NEW UPDATED NAMES MATCHING YOUR XML ---
+                // --- NEW UPDATED NAMES MATCHING XML ---
                 Button cancelBtn = dialog.findViewById(R.id.cancelTask_btn);
                 Button addTaskBtn = dialog.findViewById(R.id.addTask_btn);
                 EditText taskInput = dialog.findViewById(R.id.taskName_txt);

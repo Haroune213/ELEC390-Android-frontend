@@ -26,6 +26,31 @@ public class NotificationHelper {
             }
         }
     }
+    public static void sendReminderNotification(Context context, String title, String message) {
+        NotificationManager manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        String reminderChannelId = "reminders_channel";
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel(
+                    reminderChannelId,
+                    "Reminders",
+                    NotificationManager.IMPORTANCE_DEFAULT // Default priority so it doesn't pop up aggressively
+            );
+            channel.setDescription("Routine maintenance tasks");
+            if (manager != null) manager.createNotificationChannel(channel);
+        }
+
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(context, reminderChannelId)
+                .setSmallIcon(android.R.drawable.ic_popup_reminder)
+                .setContentTitle(title)
+                .setContentText(message)
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+                .setAutoCancel(true);
+
+        if (manager != null) {
+            manager.notify((int) System.currentTimeMillis(), builder.build());
+        }
+    }
     public static void sendNotification(Context context, String title, String message) {
         NotificationManager manager =
                 (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
