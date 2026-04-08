@@ -115,14 +115,14 @@ public class MainActivity extends AppCompatActivity {
     private final Runnable refreshRunnable = new Runnable() {
         @Override
         public void run() {
-            String id = getLoggedInUserId();
-            if (!id.isEmpty()) {
-                fetchTemperature(id);
-                fetchPh(id);
-                fetchTds(id);
-                fetchDepth(id);
-            }
-            refreshHandler.postDelayed(this, 10 * 1000);
+            // ALWAYS use "1" to pull data from the shared physical sensor
+            String forceId = "1";
+            fetchTemperature(forceId);
+            fetchPh(forceId);
+            fetchTds(forceId);
+            fetchDepth(forceId);
+
+            refreshHandler.postDelayed(this,  1000);
         }
     };
 
@@ -300,19 +300,15 @@ public class MainActivity extends AppCompatActivity {
         String userId = prefs.getString("userId", "");
 
         ApiService api = ApiClient.getClient().create(ApiService.class);
-        api.getUserPreferences(userId).enqueue(new Callback<UserPreferences>() {
+        api.getUserPreferences("1").enqueue(new Callback<UserPreferences>() {
             @Override
-            public void onResponse(Call<UserPreferences> call,
-                                   Response<UserPreferences> response) {
+            public void onResponse(Call<UserPreferences> call, Response<UserPreferences> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    UserPreferences p = response.body();
-                    applyPreferencesToGauges(p);
+                    applyPreferencesToGauges(response.body());
                 }
             }
             @Override
-            public void onFailure(Call<UserPreferences> call, Throwable t) {
-                // Keep default ranges if fail
-            }
+            public void onFailure(Call<UserPreferences> call, Throwable t) {}
         });
     }
 

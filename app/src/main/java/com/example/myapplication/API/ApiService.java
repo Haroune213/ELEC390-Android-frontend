@@ -73,4 +73,7 @@ public interface ApiService {
             @Path("userId") String userId,
             @Body PoolInfo body
     );
+    // Add this to your existing ApiService interface
+    @POST("/auth/logout/{userId}")
+    Call<Map<String, String>> logout(@Path("userId") String userId);
 }
