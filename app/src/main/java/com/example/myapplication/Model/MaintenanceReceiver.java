@@ -8,10 +8,18 @@ import android.content.SharedPreferences;
 public class MaintenanceReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Check if the user toggled Reminders OFF in SettingsActivity
         SharedPreferences prefs = context.getSharedPreferences("AppPrefs", Context.MODE_PRIVATE);
         if (!prefs.getBoolean("Reminder", true)) {
-            return; // Do nothing if notifications are disabled
+            return;
+        }
+
+        // Verify the timer belongs to the currently logged-in user
+        String taskUserId = intent.getStringExtra("userId");
+        SharedPreferences authPrefs = context.getSharedPreferences("MyAppPrefs", Context.MODE_PRIVATE);
+        String currentUserId = authPrefs.getString("userId", "");
+
+        if (taskUserId != null && !taskUserId.equals(currentUserId)) {
+            return; // User has changed, ignore the alarm
         }
 
         String taskName = intent.getStringExtra("taskName");

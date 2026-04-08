@@ -78,15 +78,20 @@ public interface ApiService {
     // Add this to your existing ApiService interface
     @POST("/auth/logout/{userId}")
     Call<Map<String, String>> logout(@Path("userId") String userId);
-@POST("/api/tasks")
-Call<TasksData> postTask(@Body TasksRequest request);
+    @POST("/api/tasks")
+    Call<TasksData> postTask(@Body TasksRequest request);
 
-@GET("/api/tasks/{userId}")
-Call<List<TasksData>> getTasksForUser(@Path("userId") String userId);
+    @GET("/api/tasks/{userId}")
+    Call<List<TasksData>> getTasksForUser(@Path("userId") String userId);
 
-@DELETE("/api/tasks/{userId}/{taskId}")
-Call<String> deleteTask(
-        @Path("userId") String userId,
-        @Path("taskId") Long taskId
-);
+    @DELETE("/api/tasks/{userId}/{taskId}")
+    Call<String> deleteTask(
+            @Path("userId") String userId,
+            @Path("taskId") Long taskId
+    );
+    @PUT("/api/tasks/{taskId}/status")
+    Call<TasksData> updateTaskStatus(
+            @Path("taskId") Long taskId,
+            @Body Map<String, Boolean> body
+    );
 }

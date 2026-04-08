@@ -207,14 +207,15 @@ public class MainActivity extends AppCompatActivity {
 
         refreshHandler.post(refreshRunnable);
 
-        MaintenanceTaskManager.setupTask(this,
+        // Get the active user ID for the default maintenance tasks
+        String userId = getLoggedInUserId();
+
+        MaintenanceTaskManager.setupTask(this, userId, null,
                 findViewById(R.id.check_filter), findViewById(R.id.date_filter), findViewById(R.id.layout_filter), 21, "filter cleaning");
-        MaintenanceTaskManager.setupTask(this,
+        MaintenanceTaskManager.setupTask(this, userId, null,
                 findViewById(R.id.check_skimmer), findViewById(R.id.date_skimmer), findViewById(R.id.layout_skimmer), 30, "skimmer clearing");
-        MaintenanceTaskManager.setupTask(this,
+        MaintenanceTaskManager.setupTask(this, userId, null,
                 findViewById(R.id.check_pump), findViewById(R.id.date_pump), findViewById(R.id.layout_pump), 30, "pump inspection");
-
-
         ImageView addButton = findViewById(R.id.add);
 
         addButton.setOnClickListener(new View.OnClickListener() {
@@ -292,11 +293,12 @@ public class MainActivity extends AppCompatActivity {
                                         LinearLayout container = findViewById(R.id.maintenance_container);
                                         MaintenanceTaskManager.createDynamicTask(
                                                 MainActivity.this,
+                                                userId,                  // Added
+                                                savedTask.getId(),       // Added
                                                 container,
                                                 savedTask.getTaskDescription(),
                                                 savedTask.getTimeSeparation()
                                         );
-
                                         dialog.dismiss();
                                     } else {
                                         Toast.makeText(MainActivity.this, "Failed to save task", Toast.LENGTH_SHORT).show();
@@ -477,6 +479,8 @@ public class MainActivity extends AppCompatActivity {
 
                         MaintenanceTaskManager.createDynamicTask(
                                 MainActivity.this,
+                                userId,         // Added
+                                task.getId(),   // Added
                                 container,
                                 desc,
                                 days
@@ -484,7 +488,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             }
-
             @Override
             public void onFailure(Call<List<TasksData>> call, Throwable t) {
                 t.printStackTrace();

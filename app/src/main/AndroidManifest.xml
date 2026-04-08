@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
     <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
     <application
@@ -16,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MyApplication">
-
+        <receiver android:name=".Model.MaintenanceReceiver" android:exported="false" />
         <activity
             android:name=".View.RegisterActivity"
             android:exported="false" />
@@ -33,7 +34,7 @@
         </activity>
         <activity android:name=".View.ProfileActivity" />
         <activity android:name=".View.SettingsActivity" />
-        <receiver android:name=".Model.MaintenanceReceiver" android:exported="false" />
+
 
         <service
             android:name=".Service.MyFirebaseMessagingService"
