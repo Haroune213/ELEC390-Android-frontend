@@ -185,11 +185,6 @@ public class editPoolInfoDialogFragment extends DialogFragment {
     @Override
     public void onStart() {
         super.onStart();
-        if (getDialog() != null && getDialog().getWindow() != null) {
-            int w = (int) (360 * getResources().getDisplayMetrics().density);
-            int h = (int) (480 * getResources().getDisplayMetrics().density);
-            getDialog().getWindow().setLayout(w, h);
-            getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        }
+
     }
 }

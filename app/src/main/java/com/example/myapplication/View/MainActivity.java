@@ -160,12 +160,8 @@ public class MainActivity extends AppCompatActivity {
                 final Dialog dialog = new Dialog(MainActivity.this);
                 dialog.setContentView(R.layout.dialog_info_box);
 
-                // 2. Set the custom dimensions (360dp x 480dp)
+                // 2. Set corners
                 if (dialog.getWindow() != null) {
-                    int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
-                    int heightInPx = (int) (530 * getResources().getDisplayMetrics().density);
-                    dialog.getWindow().setLayout(widthInPx, heightInPx);
-
                     // Make background transparent so XML corners show correctly
                     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 }

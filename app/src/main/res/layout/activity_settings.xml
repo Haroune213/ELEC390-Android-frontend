@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar — identique à ProfileActivity -->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
@@ -30,7 +29,6 @@
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <!-- Contenu scrollable -->
     <ScrollView
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -45,7 +43,6 @@
             android:layout_height="wrap_content"
             android:paddingBottom="30dp">
 
-            <!-- Section Notification Type -->
             <TextView
                 android:id="@+id/notifType_tv"
                 android:layout_width="wrap_content"
@@ -59,7 +56,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
 
-            <!-- Ligne Alerts -->
             <TextView
                 android:id="@+id/alert_label"
                 android:layout_width="wrap_content"
@@ -80,7 +76,6 @@
                 app:layout_constraintTop_toTopOf="@+id/alert_label"
                 app:layout_constraintBottom_toBottomOf="@+id/alert_label"/>
 
-            <!-- Ligne Reminders -->
             <TextView
                 android:id="@+id/reminder_label"
                 android:layout_width="wrap_content"
@@ -101,7 +96,6 @@
                 app:layout_constraintTop_toTopOf="@+id/reminder_label"
                 app:layout_constraintBottom_toBottomOf="@+id/reminder_label"/>
 
-            <!-- Divider -->
             <View
                 android:id="@+id/divider"
                 android:layout_width="match_parent"
@@ -110,7 +104,6 @@
                 android:background="?android:attr/listDivider"
                 app:layout_constraintTop_toBottomOf="@+id/reminder_label"/>
 
-            <!-- Section Historique -->
             <TextView
                 android:id="@+id/notifHistory_tv"
                 android:layout_width="wrap_content"
@@ -124,7 +117,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider"/>
 
-            <!-- Badge non-résolus -->
             <TextView
                 android:id="@+id/unread_badge"
                 android:layout_width="wrap_content"
@@ -141,7 +133,6 @@
                 app:layout_constraintTop_toTopOf="@+id/notifHistory_tv"
                 app:layout_constraintBottom_toBottomOf="@+id/notifHistory_tv"/>
 
-            <!-- Liste -->
             <ListView
                 android:id="@+id/notificationHistory_lv"
                 android:layout_width="match_parent"

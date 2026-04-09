@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -255,9 +256,8 @@ public class editPreferencesDialogFragment extends DialogFragment {
     public void onStart() {
         super.onStart();
         if (getDialog() != null && getDialog().getWindow() != null) {
-            int widthInPx  = (int) (375 * getResources().getDisplayMetrics().density);
-            int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
-            getDialog().getWindow().setLayout(widthInPx, heightInPx);
+            int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
+            getDialog().getWindow().setLayout(widthInPx, WindowManager.LayoutParams.WRAP_CONTENT);
             getDialog().getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         }
     }
