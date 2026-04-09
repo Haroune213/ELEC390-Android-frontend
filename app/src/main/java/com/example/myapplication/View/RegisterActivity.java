@@ -72,7 +72,7 @@ public class RegisterActivity extends AppCompatActivity {
                                     message != null ? message : "Registration successful",
                                     Toast.LENGTH_SHORT).show();
 
-                            startActivity(new Intent(RegisterActivity.this, MainActivity.class));
+                            startActivity(new Intent(RegisterActivity.this, LoginActivity.class));
                             finish();
                         }
 
