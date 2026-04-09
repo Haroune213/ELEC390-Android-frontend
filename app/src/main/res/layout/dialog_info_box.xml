@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
-    android:layout_height="480dp"
+    android:layout_height="510dp"
     android:background="@drawable/dialog_rounded_bg"
     android:layout_gravity="center"
     android:padding="5dp"
@@ -86,7 +86,7 @@
     <TextView
         android:id="@+id/textView6"
         android:layout_width="289dp"
-        android:layout_height="78dp"
+        android:layout_height="118dp"
         android:layout_below="@+id/textView5"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="5dp"

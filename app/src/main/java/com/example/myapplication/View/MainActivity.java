@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
                 // 2. Set the custom dimensions (360dp x 480dp)
                 if (dialog.getWindow() != null) {
                     int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
-                    int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
+                    int heightInPx = (int) (530 * getResources().getDisplayMetrics().density);
                     dialog.getWindow().setLayout(widthInPx, heightInPx);
 
                     // Make background transparent so XML corners show correctly
