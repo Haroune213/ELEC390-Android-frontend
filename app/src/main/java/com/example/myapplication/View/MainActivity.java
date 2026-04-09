@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
             fetchTds(forceId);
             fetchDepth(forceId);
 
-            refreshHandler.postDelayed(this,  1000);
+            refreshHandler.postDelayed(this,  5000);
         }
     };
 
@@ -380,7 +380,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (p.getTdsMin() != null && p.getTdsMax() != null) {
             tds_gauge.setMinValue(0f);
-            tds_gauge.setMaxValue(6000f);
+            tds_gauge.setMaxValue(3000f);
             tds_gauge.setRanges(
                     p.getTdsMin().floatValue() - 300f,
                     p.getTdsMin().floatValue(),
@@ -390,7 +390,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (p.getDepthMin() != null && p.getDepthMax() != null) {
             depth_gauge.setMinValue(0f);
-            depth_gauge.setMaxValue(500f);
+            depth_gauge.setMaxValue(250f);
             depth_gauge.setRanges(
                     p.getDepthMin().floatValue() - 10f,
                     p.getDepthMin().floatValue(),
