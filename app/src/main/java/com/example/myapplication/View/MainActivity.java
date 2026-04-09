@@ -222,8 +222,6 @@ public class MainActivity extends AppCompatActivity {
 
                 if (dialog.getWindow() != null) {
                     int widthInPx = (int) (375 * getResources().getDisplayMetrics().density);
-                    int heightInPx = (int) (500 * getResources().getDisplayMetrics().density);
-                    dialog.getWindow().setLayout(widthInPx, heightInPx);
                     dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                 }
 

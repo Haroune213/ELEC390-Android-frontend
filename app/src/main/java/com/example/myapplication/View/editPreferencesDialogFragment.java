@@ -250,7 +250,6 @@ public class editPreferencesDialogFragment extends DialogFragment {
         return text.isEmpty() ? null : Double.parseDouble(text);
     }
 
-    // Start Fragment
 
     @Override
     public void onStart() {
