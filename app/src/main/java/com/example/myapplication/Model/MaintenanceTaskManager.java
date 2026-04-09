@@ -85,7 +85,7 @@ public class MaintenanceTaskManager {
                 updateTaskStatusInBackend(taskId, true); // <--- SYNC: Mark as TRUE in database
 
                 // To test quickly, change this back to 10000 (10 seconds)
-                long delayMillis = /*(long) daysToAdd * 24 * 60 * 60 * 1000*/ 15000;
+                long delayMillis = /*(long) daysToAdd * 24 * 60 * 60 * 1000*/ 10000 ;
                 long targetTime = System.currentTimeMillis() + delayMillis;
 
                 prefs.edit().putLong(prefKey, targetTime).apply();
