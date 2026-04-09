@@ -279,115 +279,12 @@
                 app:layout_constraintTop_toTopOf="@+id/textView27" />
 
             <View
-                android:id="@+id/divider4"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="24dp"
-                android:background="?android:attr/listDivider"
-                app:layout_constraintTop_toBottomOf="@+id/textView27" />
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginStart="24dp"
-                android:fontFamily="sans-serif"
-                android:text="@string/pool_information"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/divider4" />
-
-            <Button
-                android:id="@+id/edit_button"
-                android:layout_width="75dp"
-                android:layout_height="36dp"
-                android:layout_marginEnd="24dp"
-                android:backgroundTint="#76CCD7"
-                android:text="@string/edit"
-                android:textColor="#303A38"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:cornerRadius="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textView7"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textView7" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="15dp"
-                android:text="@string/type"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
-            <TextView
-                android:id="@+id/type_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="58dp"
-                android:text="@string/loading"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView9"
-                app:layout_constraintStart_toEndOf="@+id/textView9"
-                app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-            <TextView
-                android:id="@+id/textView12"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="15dp"
-                android:text="@string/dimensions"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
-            <TextView
-                android:id="@+id/dimension_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="15dp"
-                android:text="@string/loading"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView12"
-                app:layout_constraintStart_toEndOf="@+id/textView12"
-                app:layout_constraintTop_toTopOf="@+id/textView12" />
-
-            <TextView
-                android:id="@+id/textView13"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="15dp"
-                android:text="@string/units"
-                android:textSize="14sp"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/textView12" />
-            <TextView
-                android:id="@+id/units_value"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="56dp"
-                android:text="@string/loading"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/textView13"
-                app:layout_constraintStart_toEndOf="@+id/textView13"
-                app:layout_constraintTop_toTopOf="@+id/textView13" />
-
-
-            <View
                 android:id="@+id/divider2"
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:layout_marginTop="24dp"
                 android:background="?android:attr/listDivider"
-                app:layout_constraintTop_toBottomOf="@+id/textView13" />
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
 
             <TextView
                 android:id="@+id/textView8"
@@ -398,7 +295,7 @@
                 android:text="@string/parameters_to_monitor"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
                 app:layout_constraintTop_toBottomOf="@+id/divider2" />
 
             <CheckBox
@@ -408,17 +305,8 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/pH"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
                 app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-            <CheckBox
-                android:id="@+id/pH_checkBox2"
-                android:layout_width="wrap_content"
-                android:layout_height="35dp"
-                android:layout_marginStart="15dp"
-                android:text="@string/chlorine"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox3" />
 
             <CheckBox
                 android:id="@+id/pH_checkBox4"
@@ -426,8 +314,8 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/water_temperature"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
-                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox2" />
+                app:layout_constraintStart_toStartOf="@+id/textView20"
+                app:layout_constraintTop_toBottomOf="@+id/pH_checkBox3" />
 
             <CheckBox
                 android:id="@+id/pH_checkBox5"
@@ -435,7 +323,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/water_levell"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
                 app:layout_constraintTop_toBottomOf="@+id/pH_checkBox4" />
 
             <CheckBox
@@ -444,7 +332,7 @@
                 android:layout_height="35dp"
                 android:layout_marginStart="15dp"
                 android:text="@string/water_quality_tds"
-                app:layout_constraintStart_toStartOf="@+id/textView7"
+                app:layout_constraintStart_toStartOf="@+id/textView20"
                 app:layout_constraintTop_toBottomOf="@+id/pH_checkBox5" />
 
             <View
